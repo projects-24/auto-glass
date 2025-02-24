@@ -25,6 +25,8 @@ import SectionUI from "@/ui/section";
 import { Services } from "./data/services";
 import { reviews } from "./data/reviews";
 import RowFlexUi from "@/ui/RowFlex";
+import { FaPlusSquare } from 'react-icons/fa';
+
 
 export default function Home() {
   const [success, setsuccess] = useState(false)
@@ -59,46 +61,97 @@ useEffect(() => {
   <Nav />
   <div id="home"></div>
 
-<div className="home">
-  <div className="">
+  <div className="home">
+  <div>
     <div className="row">
       <div className="col sm-12 md-6 lg-6 padding">
-        <div className="">
-          <img src="/images/pics/autoglass.jpg" className="fit" alt="AutoGlass Repair" />
+        <div>
+          <img src="/images/pics/autoglass12.jpg" className="fit" alt="AutoGlass Repair"
+          style={{
+            width: "90%",   // Reduce the width slightly (adjust as needed)
+            height: "auto",  // Maintain aspect ratio
+            display: "block", 
+            margin: "0 auto" // Center the image if needed
+          }}  
+          />
         </div>
       </div>
       <div className="col sm-12 md-6 lg-6 padding">
         <div className="flex central fit">
           <div className="container">
-          <TextUi
-          text="AutoGlass Repair: Your Safety, Our Priority"
-          block
-          lineHeight="100%"
-          size='big'
-          color='p'
-        />
-        <SectionUI>
-          <TextUi
-            text={<>
-              <p>
-                At <span className="lighted">AutoGlass Repair</span>, we believe that <span className="lighted">clear, safe windows</span> are essential for your vehicles performance and your peace of mind. 
-              </p>
-            </>}
-            block
-            lineHeight="150%"
-            heading='h5'
-          />
-        </SectionUI>
-        <div className="margin-top-30">
-          <div className="row-flex gap">
-            <a href="#contact">
-              <button className="bg-p raised button">Contact Us</button>
-            </a>
-            <a href="#services">
-              <button className="bg-s raised button">Our Services</button>
-            </a>
+            <TextUi
+              text="AutoGlass Gurus: Your Safety, Our Priority"
+              block
+              lineHeight="100%"
+              size="big"
+              color="p"
+            />
+            <SectionUI>
+              <TextUi
+                text={
+                  <>
+                    <p>
+                      At <span style={{ fontWeight: "bold", color: "#007bff" }}>AutoGlass Repair</span>, we believe that{" "}
+                      <span style={{ fontWeight: "bold", color: "#007bff" }}>clear, safe windows</span> are essential for your
+                      vehicle’s performance and your peace of mind.
+                    </p>
+                  </>
+                }
+                block
+                lineHeight="150%"
+                heading="h5"
+              />
+            </SectionUI>
+
+            {/* Highlighted Key Benefits */}
+                      <div
+            style={{
+              background: "rgba(0, 123, 255, 0.1)", // Light blue background
+              padding: "20px",
+              borderRadius: "8px",
+              borderLeft: "4px solid #007bff",
+              marginTop: "20px",
+              fontSize: "20px", // Increased font size for readability
+              fontWeight: "bold",
+              lineHeight: "1.5", // Better line spacing
+              wordSpacing: "2px", // Prevents words from sticking together
+            }}
+          >
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
+                <FaPlusSquare style={{ color: "#007bff", fontSize: "22px", marginRight: "10px" }} />
+                We Pay Up To <span style={{ color: "#ff5733", fontWeight: "bold" }}>100%</span> Of Your Deductible
+              </li>
+              <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
+                <FaPlusSquare style={{ color: "#007bff", fontSize: "22px", marginRight: "10px" }} />
+                Lifetime Auto Glass Repair <strong>Warranty</strong>
+              </li>
+              <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
+                <FaPlusSquare style={{ color: "#007bff", fontSize: "22px", marginRight: "10px" }} />
+                We Will Beat Any Competitor <span style={{ color: "#ff5733", fontWeight: "bold" }}>By 10%!</span>
+              </li>
+              <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
+                <FaPlusSquare style={{ color: "#007bff", fontSize: "22px", marginRight: "10px" }} />
+                Canadian Owned & Operated
+              </li>
+            </ul>
           </div>
-        </div>
+
+            <div style={{ marginTop: "30px" }}>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <a href="#contact">
+                  <button style={{ background: "#007bff", padding: "10px 20px", borderRadius: "5px", color: "white", border: "none", cursor: "pointer" }}>
+                    Contact Us
+                  </button>
+                </a>
+                <a href="#services">
+                  <button style={{ background: "#28a745", padding: "10px 20px", borderRadius: "5px", color: "white", border: "none", cursor: "pointer" }}>
+                    Our Services
+                  </button>
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -145,7 +198,7 @@ useEffect(() => {
   <div className="contain">
     <div className="header" data-aos="fade-down">
       <h2 className="title">
-        - About AutoGlass Repair
+        - About AutoGlass Gurus
       </h2>
       <div className="section"></div>
       <div className="article h5">
