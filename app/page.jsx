@@ -91,7 +91,7 @@ useEffect(() => {
                 text={
                   <>
                     <p>
-                      At <span style={{ fontWeight: "bold", color: "#007bff" }}>AutoGlass Repair</span>, we believe that{" "}
+                      At <span style={{ fontWeight: "bold", color: "#007bff" }}>AutoGlass Gurus</span>, we believe that{" "}
                       <span style={{ fontWeight: "bold", color: "#007bff" }}>clear, safe windows</span> are essential for your
                       vehicle’s performance and your peace of mind.
                     </p>
@@ -304,11 +304,11 @@ useEffect(() => {
             <div className="col sm-12 md-6 lg-6 padding" data-aos="fade-up">
               <div className="section padding border round-edge">
                 <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Address:</h6>
-                <h5>123 AutoGlass Street, Springfield</h5>
+                <h5>123 AutoGlass Gurus, Toronto</h5>
               </div>
               <div className="section padding border round-edge">
                 <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Location:</h6>
-                Near City Center, Springfield, USA
+                Toronto, Canada
               </div>
             </div>
             <div className="col sm-12 md-6 lg-6 padding">
@@ -316,12 +316,12 @@ useEffect(() => {
               <div className="border padding round-edge section" data-aos="fade-up">
                 <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Call Us:</h6>
                 <h5>
-                  +1 234 567 8901
+                +1 647-708-4226
                 </h5>
               </div>
               <div className="section padding border round-edge">
                 <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Email:</h6>
-                <h5>info@autoglassrepair.com</h5>
+                <h5>info@autoglassgurus.ca</h5>
               </div>
             </div>
           </div>
