@@ -2,18 +2,18 @@
 import React from 'react'
 import Button from 'funuicss/ui/button/Button'
 
-export default function UiButton({primary, dark, text , ...rest}) {
+export default function UiButton({primary, secondary, text , ...rest}) {
   return primary ? <Button 
-  rounded 
+  flat
   bg='primary' 
   text={text || ''} 
   {...rest}
-  /> : dark ? <Button 
-  bg='dark200'
+  /> : secondary ? <Button 
+  bg='bg-s'
   color='white'
-  rounded 
   text={text || ''} 
   {...rest} 
+  flat
   /> : <Button 
 
   text={text || ''}

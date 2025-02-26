@@ -17,7 +17,7 @@ import ListItem from 'funuicss/ui/list/Item'
 import {FunGet} from 'funuicss/js/Fun'
 import Alert from 'funuicss/ui/alert/Alert'
 import Nav from "@/components/Nav";
-import {PiDiamondsFour, PiGoogleLogo, PiSketchLogo, PiStarDuotone, PiUserCheck} from 'react-icons/pi'
+import {PiDiamondsFour, PiGear, PiGoogleLogo, PiPhone, PiSketchLogo, PiStarDuotone, PiUserCheck} from 'react-icons/pi'
 import Footer from "@/components/Footer";
 import TextUi from "@/ui/Text";
 import { _Articles } from "./functions/FaceBookPost";
@@ -26,6 +26,7 @@ import { Services } from "./data/services";
 import { reviews } from "./data/reviews";
 import RowFlexUi from "@/ui/RowFlex";
 import { FaPlusSquare } from 'react-icons/fa';
+import UiButton from "@/ui/button";
 
 
 export default function Home() {
@@ -62,76 +63,34 @@ useEffect(() => {
   <div id="home"></div>
 
   <div className="home">
-  <div>
-    <div className="row">
-      <div className="col sm-12 md-6 lg-6 padding">
-        <div>
-          <img src="/images/pics/autoglass12.jpg" className="fit" alt="AutoGlass Repair"
-          style={{
-            width: "90%",   // Reduce the width slightly (adjust as needed)
-            height: "auto",  // Maintain aspect ratio
-            display: "block", 
-            margin: "0 auto" // Center the image if needed
-          }}  
-          />
-        </div>
-      </div>
-      <div className="col sm-12 md-6 lg-6 padding">
-        <div className="flex central fit">
-          <div className="container">
-            <TextUi
+  <div className="homeTab white">
+         <div className="width-600-max center">
+         <TextUi
               text="AutoGlass Gurus: Your Safety, Our Priority"
               block
               lineHeight="100%"
               size="big"
               color="p"
             />
-            <SectionUI>
-              <TextUi
-                text={
-                  <>
-                    <p>
-                      At <span style={{ fontWeight: "bold", color: "#007bff" }}>AutoGlass Gurus</span>, we believe that{" "}
-                      <span style={{ fontWeight: "bold", color: "#007bff" }}>clear, safe windows</span> are essential for your
-                      vehicle’s performance and your peace of mind.
-                    </p>
-                  </>
-                }
-                block
-                lineHeight="150%"
-                heading="h5"
-              />
-            </SectionUI>
 
             {/* Highlighted Key Benefits */}
                       <div
-            style={{
-              background: "rgba(0, 123, 255, 0.1)", // Light blue background
-              padding: "20px",
-              borderRadius: "8px",
-              borderLeft: "4px solid #007bff",
-              marginTop: "20px",
-              fontSize: "20px", // Increased font size for readability
-              fontWeight: "bold",
-              lineHeight: "1.5", // Better line spacing
-              wordSpacing: "2px", // Prevents words from sticking together
-            }}
           >
             <ul style={{ listStyle: "none", padding: 0 }}>
               <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
-                <FaPlusSquare style={{ color: "#007bff", fontSize: "22px", marginRight: "10px" }} />
+                <FaPlusSquare style={{ color: "#007bff", marginRight: "10px" }} />
                 We Pay Up To <span style={{ color: "#ff5733", fontWeight: "bold" }}>100%</span> Of Your Deductible
               </li>
               <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
-                <FaPlusSquare style={{ color: "#007bff", fontSize: "22px", marginRight: "10px" }} />
+                <FaPlusSquare style={{ color: "#007bff", marginRight: "10px" }} />
                 Lifetime Auto Glass Repair <strong>Warranty</strong>
               </li>
               <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
-                <FaPlusSquare style={{ color: "#007bff", fontSize: "22px", marginRight: "10px" }} />
+                <FaPlusSquare style={{ color: "#007bff", marginRight: "10px" }} />
                 We Will Beat Any Competitor <span style={{ color: "#ff5733", fontWeight: "bold" }}>By 10%!</span>
               </li>
               <li style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
-                <FaPlusSquare style={{ color: "#007bff", fontSize: "22px", marginRight: "10px" }} />
+                <FaPlusSquare style={{ color: "#007bff", marginRight: "10px" }} />
                 Canadian Owned & Operated
               </li>
             </ul>
@@ -140,23 +99,26 @@ useEffect(() => {
             <div style={{ marginTop: "30px" }}>
               <div style={{ display: "flex", gap: "10px" }}>
                 <a href="#contact">
-                  <button style={{ background: "#007bff", padding: "10px 20px", borderRadius: "5px", color: "white", border: "none", cursor: "pointer" }}>
-                    Contact Us
-                  </button>
+                  <UiButton 
+                  text={"Contact Us"}
+                  startIcon={<PiPhone />}
+                  raised
+                  primary
+                  />
                 </a>
                 <a href="#services">
-                  <button style={{ background: "#28a745", padding: "10px 20px", borderRadius: "5px", color: "white", border: "none", cursor: "pointer" }}>
-                    Our Services
-                  </button>
+                <UiButton 
+                  text={"Our Services"}
+                  startIcon={<PiGear />}
+                  raised
+                  secondary
+                  />
                 </a>
               </div>
             </div>
 
+         </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div id="services"></div>
