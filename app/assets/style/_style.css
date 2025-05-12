@@ -21,6 +21,14 @@
 .secondary{background-color: var(--secondary) !important;}
 
 *{box-sizing: border-box; font-family: "DM Sans", sans-serif;scroll-behavior: smooth !important; }
+
+
+    @media screen and (max-width: 780px) {
+  input, textarea {
+    font-size: 16px !important;
+  }
+}
+
 body{overflow-x: hidden !important;}
 .title{
     font-size: 3rem !important;
