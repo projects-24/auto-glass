@@ -67,7 +67,7 @@ useEffect(() => {
 
   <div className="home">
   <div className="homeTab text-white">
-         <div className="center" style={{width:"90%"}}>
+         <div >
     
          <TextUi
               text="Your Safety, Our Priority"

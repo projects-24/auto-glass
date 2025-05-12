@@ -32,7 +32,7 @@ export default function page() {
         </div>
         <div className="margin-top-50">
    <div className="width-600-max center">
-            <RowFlexUi gap={1} funcss='section'>
+            <RowFlexUi responsiveSmall gap={1} funcss='section'>
             <div className="col">
                 <IconicInput 
     funcss=" full-width" 
@@ -48,7 +48,7 @@ export default function page() {
      />
             </div>
         </RowFlexUi>
-        <RowFlexUi gap={1} funcss='section'>
+        <RowFlexUi responsiveSmall gap={1} funcss='section'>
             <div className="col">
                 <IconicInput 
     funcss=" full-width" 

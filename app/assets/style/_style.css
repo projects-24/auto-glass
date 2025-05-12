@@ -71,6 +71,16 @@ position: relative;
     z-index: 1;
 
 }
+@media(max-width:800px){
+    .homeTab{
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
 /* Background color classes */
 .bg-p, .p { background-color: var(--p) !important; }
 
