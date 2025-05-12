@@ -29,7 +29,14 @@ export default function Nav() {
           />
               <TextUi
           text="+1 647-708-4226"
-          heading='h5'
+          heading='h3'
+          block 
+          funcss='hide-small'
+          />
+              <TextUi
+          text="+1 647-708-4226"
+          block 
+          funcss='show-small'
           />
         </div>
         </RowFlexUi>
@@ -45,7 +52,14 @@ export default function Nav() {
           />
               <TextUi
           text="+1 (905) 226-4226"
-          heading='h5'
+          heading='h3'
+                block 
+          funcss='hide-small'
+          />
+              <TextUi
+          text="+1 (905) 226-4226"
+                block 
+          funcss='show-small'
           />
         </div>
         </RowFlexUi>

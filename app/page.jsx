@@ -84,25 +84,33 @@ useEffect(() => {
                 <CircleUi size={1.4} bg={"white text-primary"} >
                   <PiChecks  />
                 </CircleUi>
-                We Pay Up To <span className="text-bold"> 100%</span> Of Your Deductible
+                <div>
+                  We Pay Up To  100% Of Your Deductible
+                </div>
               </RowFlexUi>
               <RowFlexUi gap={0.5} funcss='section'>
                  <CircleUi size={1.4} bg={"white text-primary"} >
                   <PiChecks  />
                 </CircleUi>
-                Lifetime Auto Glass Repair <strong> Warranty</strong>
+                <div>
+                Lifetime Auto Glass Repair Warranty
+                </div>
               </RowFlexUi>
               <RowFlexUi gap={0.5} funcss='section'>
           <CircleUi size={1.4} bg={"white text-primary"} >
                   <PiChecks  />
                 </CircleUi>
+                <div>
                 We Will Beat Any Competitor <span className="text-bold"> By 10%!</span>
+                </div>
               </RowFlexUi>
               <RowFlexUi gap={0.5} funcss='section'>
             <CircleUi size={1.4} bg={"white text-primary"} >
                   <PiChecks  />
                 </CircleUi>
+                <div>
                 Canadian Owned & Operated
+                </div>
               </RowFlexUi>
           </div>
 
