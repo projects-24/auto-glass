@@ -5,7 +5,7 @@ export default function Hero({hero , body}) {
   return (
           <div className="home hero">
           <div className="homeTab text-white text-center center" >
-                 <div className="center" style={{width:"90%"}}>
+                 <div className="width-700-max center fit" >
             
                  <TextUi
                       text={hero || "Your Safety, Our Priority"}
