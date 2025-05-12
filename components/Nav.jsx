@@ -1,44 +1,81 @@
 import UiButton from '@/ui/button'
 import Link from 'next/link'
 import React from 'react'
-import { PiCalendar } from 'react-icons/pi'
+import { PiCalendar, PiPhone } from 'react-icons/pi'
 import Image from 'next/image'
 import Logo from '@/ui/Logo'
+import RowFlexUi from '@/ui/RowFlex'
+import TextUi from '@/ui/Text'
 export default function Nav() {
   return (
     <div> <div class="navtop white">
+          {/* Logo with Image */}
+     <a href="/#home">
+          <Logo />
+        </a>
     <div >
-      <span className="h4">+1 647-708-4226 || +1 (905) 226-4226</span>
+      <RowFlexUi gap={2}>
+        <RowFlexUi gap={0.1}>
+          <PiPhone size={30} className='text-primary' />
+        <div>
+              <TextUi
+          text="Place a call"
+          size='smaller'
+          bold
+          uppercase
+          color={'primary'}
+          />
+              <TextUi
+          text="+1 647-708-4226"
+          heading='h4'
+          />
+        </div>
+        </RowFlexUi>
+        <RowFlexUi gap={0.1}>
+          <PiPhone size={30} className='text-primary' />
+        <div>
+              <TextUi
+          text="Place a call"
+          size='smaller'
+          bold
+          uppercase
+          color={'primary'}
+          />
+              <TextUi
+          text="+1 (905) 226-4226"
+          heading='h4'
+          />
+        </div>
+        </RowFlexUi>
+      </RowFlexUi>
     </div>
-    <div class="hline"></div>
     <div >
-      <a href="mailto:info@autoglassgurus.ca"  >info@autoglassgurus.ca</a>
+      <a href="mailto:info@autoglassgurus.ca"  className='text-primary'>info@autoglassgurus.ca</a>
     </div>
   </div>
   <div class="nav_bar ">
-     {/* Logo with Image */}
-     <a href="#home">
-          <Logo />
-        </a>
+ 
 
   <div class="hide-small">
     <div class="row-flex gap">
-      <a href="#home" class="nav_link text-white  text-minified">Home</a>
-      <a href="#about" class="nav_link text-white  text-minified">About</a>
-      <a href="#services" class="nav_link text-white  text-minified">Services</a>
-      <a href="#testimonials" class="nav_link text-white  text-minified">Testimonials</a>
-      <a href="#contact" class="nav_link text-white  text-minified">Contact</a>
+      <a href="/contact" class="nav_link text-white  text-minified">Home</a>
+      <a href="/#about" class="nav_link text-white  text-minified">About</a>
+      <a href="/#services" class="nav_link text-white  text-minified">Services</a>
+      <a href="/#testimonials" class="nav_link text-white  text-minified">Testimonials</a>
+      <a href="/#contact" class="nav_link text-white  text-minified">Contact</a>
     </div>
   </div>
     <div>
      <div class="row-flex ">
       <div>
-        <Link href={""}>
+        <Link href={"/contact"}>
         <UiButton 
-      text={"Book an Appointment"}
-      bg='gradient'
-       flat
-      startIcon={<PiCalendar />}
+      text={"Get a Quick Qoute"}
+      bg='white'
+        fillAnimation 
+   outlined 
+   outlineSize={0.1}
+   fillTextColor='primary' 
       />
         </Link>
     
