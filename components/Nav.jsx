@@ -29,7 +29,7 @@ export default function Nav() {
           />
               <TextUi
           text="+1 647-708-4226"
-          heading='h3'
+          heading='h5'
           funcss='hide-small'
           />
               <TextUi
@@ -50,7 +50,7 @@ export default function Nav() {
           />
               <TextUi
           text="+1 (905) 226-4226"
-          heading='h3'
+          heading='h5'
           funcss='hide-small'
           />
               <TextUi
@@ -74,7 +74,7 @@ export default function Nav() {
 </div>
   <div class="hide-small">
     <div class="row-flex gap">
-      <a href="/contact" class="nav_link text-white  text-minified">Home</a>
+      <a href="/" class="nav_link text-white  text-minified">Home</a>
       <a href="/#about" class="nav_link text-white  text-minified">About</a>
       <a href="/#services" class="nav_link text-white  text-minified">Services</a>
       <a href="/#testimonials" class="nav_link text-white  text-minified">Testimonials</a>

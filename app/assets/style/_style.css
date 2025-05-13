@@ -30,11 +30,22 @@
 }
 
 body{overflow-x: hidden !important;}
+.article{font-size: 1.1rem !important;}
 .title{
     font-size: 3rem !important;
     font-weight: 900 !important;
     line-height: 90% !important;
-    color: var(--s);
+    /* color: var(--primary); */
+}
+img{
+    clip-path: polygon(4% 0, 100% 0%, 96% 100%, 0% 100%) !important;
+}
+.text-big , .text-bigger, .text-jumbo{
+    line-height: 90% !important;
+}
+.list-style-none{
+    list-style-type: none;
+    margin: 0;
 }
 .text-italic{font-style: italic;}
 .home{
@@ -221,7 +232,7 @@ i{margin: 0 !important;padding: 0 !important;}
 
 
 .header{
-    max-width: 400px;
+    max-width: 600px;
     text-align: center;
     margin: 0 auto;
 }
@@ -245,3 +256,32 @@ overflow-x: none !important;
     border-left: 0.5rem solid var(--p);
   }
  
+  /* Base order classes */
+.order-1 { order: 1; }
+.order-2 { order: 2; }
+.order-3 { order: 3; }
+/* Add more if needed */
+
+/* Medium screen and up (md breakpoint) */
+@media (min-width: 768px) {
+  .order-md-1 { order: 1; }
+  .order-md-2 { order: 2; }
+  .order-md-3 { order: 3; }
+  /* Add more if needed */
+}
+
+/* Large screen and up (lg breakpoint) */
+@media (min-width: 992px) {
+  .order-lg-1 { order: 1; }
+  .order-lg-2 { order: 2; }
+  .order-lg-3 { order: 3; }
+  /* Add more if needed */
+}
+
+/* Extra large screen and up (xl breakpoint) */
+@media (min-width: 1200px) {
+  .order-xl-1 { order: 1; }
+  .order-xl-2 { order: 2; }
+  .order-xl-3 { order: 3; }
+  /* Add more if needed */
+}

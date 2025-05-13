@@ -17,12 +17,12 @@ import ListItem from 'funuicss/ui/list/Item'
 import {FunGet} from 'funuicss/js/Fun'
 import Alert from 'funuicss/ui/alert/Alert'
 import Nav from "@/components/Nav";
-import {PiChecks, PiDiamondsFour, PiGear, PiGoogleLogo, PiPhone, PiSketchLogo, PiStarDuotone, PiUserCheck} from 'react-icons/pi'
+import {PiChecks, PiDiamondsFour, PiGear, PiGoogleLogo, PiPhone, PiPlusCircle, PiSketchLogo, PiStarDuotone, PiUserCheck} from 'react-icons/pi'
 import Footer from "@/components/Footer";
 import TextUi from "@/ui/Text";
 import { _Articles } from "./functions/FaceBookPost";
 import SectionUI from "@/ui/section";
-import { Services } from "./data/services";
+import { autoGlassBenefits, autoGlassData, Services } from "./data/services";
 import { reviews } from "./data/reviews";
 import RowFlexUi from "@/ui/RowFlex";
 import { FaPlusSquare } from 'react-icons/fa';
@@ -30,6 +30,7 @@ import UiButton from "@/ui/button";
 import Logo from "@/ui/Logo";
 import Link from "next/link";
 import CircleUi from "@/ui/Circle";
+import { companies } from "./data/Companies";
 
 
 export default function Home() {
@@ -132,28 +133,19 @@ useEffect(() => {
           </div>
 </div>
 
-<div id="services"></div>
-<div className="wrapper dark800 text-dark central" data-aos="fade-up">
-  <div className="contain">
-    <div className="header" data-aos="fade-down">
-      <h2 className="title">
-        - Discover Our Auto Glass Services
-      </h2>
-      <div className="section"></div>
-      <div className="article h5">
-        From minor chips to full windshield replacements, our expert team is here to restore your vehicles glass to its original condition.
-      </div>
-    </div>
-    <div className="row">
+<div id=""></div>
+<div className="wrapper central" data-aos="fade-up">
+<div>
+      <div className="row">
       {
-        Services.map((doc, i) => (
-          <div key={i} className="col sm-12 md-12 lg-6 padding margin-top-30">
+        autoGlassData.map((doc, i) => (
+          <div key={i} className="col sm-12 md-4 lg-3 padding margin-top-30">
             <Animation>
               <div className='product-image hover-up pointer'>
-                <img src={doc.image} alt={doc.name} className='fit round-edge' />
+                <img src={doc.image} alt={doc.title} className='width-80' />
               </div>
               <div className="margin-top-20">
-                <div className='h4 text-p text-bold important'>{doc.name}</div>
+                <div className='h5'>{doc.title}</div>
               </div>
               <div className="margin-top-10 article text-dark300">
                 {doc.description}
@@ -163,6 +155,122 @@ useEffect(() => {
         ))
       }
     </div>
+    <div className="row central">
+      <div className="col sm-12 md-12 lg-4 padding">
+        {
+          autoGlassBenefits.slice(0 , autoGlassBenefits.length / 2).map((doc, i) => {
+            return (
+              <RowFlexUi  data-aos="fade-up" key={i} gap={0.5} alignItems='flex-start' funcss='section'>
+                <PiPlusCircle className="text-primary" size={30} />
+                <div>
+                  <TextUi
+                  text={doc.title}
+                  heading='h4'
+                  bold
+                  block
+                  />
+                  <TextUi
+                  text={doc.description}
+                  article
+                  />
+                </div>
+              </RowFlexUi>
+            )
+          })
+        }
+      </div>
+      <div className="col sm-12 md-12 lg-4">
+        <img  data-aos="fade-up" src="/images/1.jpg" className="width-100-p" alt="" />
+      </div>
+        <div className="col sm-12 md-12 lg-4 padding">
+        {
+          autoGlassBenefits.slice((autoGlassBenefits.length / 2) + 1 , autoGlassBenefits.length).map((doc, i) => {
+            return (
+              <RowFlexUi  data-aos="fade-up" key={i} gap={0.5} alignItems='flex-start' funcss='section'>
+                <PiPlusCircle className="text-primary" size={30} />
+                <div>
+                  <TextUi
+                  text={doc.title}
+                  heading='h4'
+                  bold
+                  block
+                  />
+                  <TextUi
+                  text={doc.description}
+                  article
+                  />
+                </div>
+              </RowFlexUi>
+            )
+          })
+        }
+      </div>
+    </div>
+
+    <div className="section">
+      <div className="row">
+        {
+        companies.map((res , index) => {
+          return (
+          <div key={index} className="col text-center sm-4 md-3 lg-3 padding">
+            <img src={res} width={"100px"}/>
+          </div>
+          )
+        })
+      }
+      </div>
+    </div>
+</div>
+</div>
+<div id="services"></div>
+<div className="wrapper dark800 text-dark central" data-aos="fade-up">
+  <div className="">
+    <div className="header" data-aos="fade-down">
+      <h2 className="title">
+        - Discover Our Auto Glass Services
+      </h2>
+      <div className="section"></div>
+      <div className="article h5">
+        From minor chips to full windshield replacements, our expert team is here to restore your vehicles glass to its original condition.
+      </div>
+    </div>
+<div >
+  {Services.map((doc, i) => (
+    <div key={i} className="padding margin-top-30">
+      <Animation>
+        <RowFlexUi gap={4} justify='center' style={{flexWrap:"wrap"}}>
+          <div className={`col sm-12 ${i % 2 === 0 ? 'md-6' : 'md-6 order-md-2'}`}>
+            <div className='product-image hover-up pointer'>
+              <img src={doc.image} alt={doc.name} className='fit ' />
+            </div>
+          </div>
+          <div className={`padding-20 col sm-12 ${i % 2 === 0 ? 'md-6' : 'md-6 order-md-1'}`}>
+                {doc.subtitle && (
+              <div className='h5 text-secondary margin-top-5'>{doc.subtitle}</div>
+            )}
+            <TextUi size='bigger' block>{doc.name}</TextUi>
+            <div className="margin-top-10 article">
+              {doc.description}
+            </div>
+
+            <div className="section">
+                     <Link href={"/contact"}>
+        <UiButton 
+      text={"Get a Quick Qoute"}
+      bg='primary'
+        fillAnimation 
+   outlined 
+   outlineSize={0.1}
+   fillTextColor='dark900' 
+      />
+        </Link>
+            </div>
+          </div>
+        </RowFlexUi>
+      </Animation>
+    </div>
+  ))}
+</div>
   </div>
 </div>
 
@@ -221,11 +329,14 @@ useEffect(() => {
         </div>
       </div>
       <div className="margin-top-50">
-        <div className="width-700-max center">
+        <div className="row">
           {
             reviews.map((doc, i) => (
-              <div class="section border padding-20 round-edge" data-aos="fade-up" key={i}>
-                <h2 class="text-bold text-p">{doc.user}</h2>
+              <div class="col sm-12 md-6 lg-6 padding" data-aos="fade-up" key={i}>
+                <div className="">
+                  <img src={doc.profile} className="width-50 circle" alt="" />
+                </div>
+                <h2 class="text-bold section">{doc.user}</h2>
                 <p>
                   <RowFlexUi gap={2} justify='space-between'>
                     <div class="row-flex">
