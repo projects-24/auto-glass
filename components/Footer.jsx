@@ -94,12 +94,6 @@ export default function Footer() {
         >
           <RowFlexUi gap={2} justify="center">
             <span>© {new Date().getFullYear()} AutoGlass Gurus</span>
-            <span>|</span>
-            <span className="pointer hover-up">All Rights Reserved</span>
-            <span>|</span>
-            <span className="pointer hover-up">Privacy Policy</span>
-            <span>|</span>
-            <span className="pointer hover-up">Terms of Service</span>
           </RowFlexUi>
         </div>
       </div>
