@@ -20,7 +20,6 @@ import Nav from "@/components/Nav";
 import {PiChecks, PiDiamondsFour, PiGear, PiGoogleLogo, PiPhone, PiPlusCircle, PiSketchLogo, PiStarDuotone, PiUserCheck} from 'react-icons/pi'
 import Footer from "@/components/Footer";
 import TextUi from "@/ui/Text";
-import { _Articles } from "./functions/FaceBookPost";
 import SectionUI from "@/ui/section";
 import { autoGlassBenefits, autoGlassData, Services } from "./data/services";
 import { reviews } from "./data/reviews";
