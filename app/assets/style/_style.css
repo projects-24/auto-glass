@@ -101,8 +101,8 @@ position: relative;
     }
     .home{
         background-image: url("/mobile.jpg");
-        background-attachment: fixed;
-        background-size: cover;
+        background-size: contain;
+        
     }
     .home::after { 
     background: linear-gradient(to top, rgba(5, 61, 112 , 0.9),  rgba(5, 61, 112 , 0.1)); /* Add your desired end color */
