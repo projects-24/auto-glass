@@ -80,6 +80,7 @@ useEffect(() => {
 
             {/* Highlighted Key Benefits */}
                       <div
+                      className="article"
           >
               <RowFlexUi gap={0.5} funcss='section'>
                 <CircleUi size={1.4} bg={"white text-primary"} >
@@ -123,7 +124,7 @@ useEffect(() => {
         fillAnimation 
    outlined 
    outlineSize={0.1}
-   jumbo
+   big
    fillTextColor='primary' 
       />
         </Link>

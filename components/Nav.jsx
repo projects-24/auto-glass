@@ -1,21 +1,30 @@
 import UiButton from '@/ui/button'
 import Link from 'next/link'
 import React from 'react'
-import { PiCalendar, PiPhone } from 'react-icons/pi'
+import { PiCalendar, PiPhone, PiWhatsappLogo } from 'react-icons/pi'
 import Image from 'next/image'
 import Logo from '@/ui/Logo'
 import RowFlexUi from '@/ui/RowFlex'
 import TextUi from '@/ui/Text'
+import LandbotLoader from './LandbotLoader'
 export default function Nav() {
   return (
-    <div> <div class="navtop white">
+    <div> 
+      <LandbotLoader />
+      <div className="whatsappBtn">
+        <PiWhatsappLogo size={25}/>
+        <div>
+         whatsApp Us
+        </div>
+      </div>
+      <div class="navtop white">
           {/* Logo with Image */}
-     <div className="hide-small">
+     <div >
       <a href="/#home">
           <Logo />
         </a>
      </div>
-    <div >
+    <div className='hide-small'>
       <RowFlexUi gap={1}>
         <RowFlexUi gap={0.1}>
           <PiPhone size={30} className='text-primary' />
@@ -64,14 +73,23 @@ export default function Nav() {
     <div className='hide-small' >
       <a href="mailto:info@autoglassgurus.ca"  className='text-primary'>info@autoglassgurus.ca</a>
     </div>
+
+      <div className='show-small'>
+        <Link href={"/contact"}>
+        <UiButton 
+      text={"Get a Quick Qoute"}
+      bg='primary'
+        fillAnimation 
+   outlined 
+   outlineSize={0.1}
+   fillTextColor='dark900' 
+      />
+        </Link>
+    
+      </div>
   </div>
   <div class="nav_bar ">
  
-<div className="show-small">
-       <a href="/#home">
-          <Logo />
-        </a>
-</div>
   <div class="hide-small">
     <div class="row-flex gap">
       <a href="/" class="nav_link text-white  text-minified">Home</a>
@@ -82,8 +100,7 @@ export default function Nav() {
     </div>
   </div>
     <div>
-     <div class="row-flex ">
-      <div>
+      <div className='hide-small'>
         <Link href={"/contact"}>
         <UiButton 
       text={"Get a Quick Qoute"}
@@ -96,7 +113,30 @@ export default function Nav() {
         </Link>
     
       </div>
-     </div>
+          <div className='show-small'>
+      <RowFlexUi gap={1}>
+        <RowFlexUi gap={0.1}>
+          <PiPhone size={20} className='text-white' />
+        <div>
+              <TextUi
+          text="+1 647-708-4226"
+          color={"white"}
+          />
+        </div>
+        </RowFlexUi>
+        <RowFlexUi gap={0.1}>
+            <PiPhone size={20} className='text-white' />
+        <div>
+              <TextUi
+          text="+1 (905) 226-4226"
+          color={"white"}
+          />
+        </div>
+        
+        </RowFlexUi>
+      </RowFlexUi>
+    </div>
+   
     </div>
   </div>
 </div>
