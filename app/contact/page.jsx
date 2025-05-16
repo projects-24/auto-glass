@@ -14,32 +14,39 @@ import { cars } from '@/functions/Functions';
 export default function Contact() {
   const [state, setstate] = useState(0)
   const [questions, setquestions] = useState(
-    [
-    {question:`Which car glass needs replacement?`,
-    answer:""
-    }
-    ,
-    {question:`Which car type?`,
-    answer:""
-    }
-    ,
-    {question:`Select car model`,
-    answer:""
-    }
-    ,
-    {question:`Vehicle Year`,
-    answer:""
-    }
-      ,
-    {question:`Vehicle Registration number`,
-    answer:""
-    }
-    ,
-    {question:`Enter your personal information`,
-    answer:""
-    }
-    
-  ]
+   [
+  {
+    question: "Which car glass needs replacement?",
+    answer: "",
+    subtitle: "Specify the damaged glass part, e.g., front windshield, rear window, or side glass."
+  },
+  {
+    question: "Which car Make?",
+    answer: "",
+    subtitle: "Select the brand or manufacturer of your vehicle, such as Toyota, Ford, or BMW."
+  },
+  {
+    question: "Select car model",
+    answer: "",
+    subtitle: "Choose the specific model of your car, like Corolla, Camry, or F-150."
+  },
+  {
+    question: "Vehicle Year",
+    answer: "",
+    subtitle: "Enter the year your car was manufactured, such as 2015 or 2022."
+  },
+  {
+    question: "Vehicle Registration number",
+    answer: "",
+    subtitle: "Provide your car's license plate or registration number for identification."
+  },
+  {
+    question: "Enter your personal information",
+    answer: "",
+    subtitle: "Fill in your name, phone number, and any other required contact details."
+  }
+]
+
 )
 
 
@@ -66,10 +73,15 @@ const Submit = () => {
    <div className="width-600-max center">
    <div className="text-center section margin-bottom-50">
      {
+     <>
       <TextUi
       text={questions[state].question}
       size='big'
       />
+      <p className='article'>
+        {questions[state].subtitle || ''}
+      </p>
+     </>
     }
    </div>
     {
@@ -161,7 +173,20 @@ const Submit = () => {
       </div>
       : state == 1 ?
       <>
-      <Input
+         <Input
+      fullWidth
+      bordered
+      label="Car Make"
+       onChange={(e) => {
+    questions[state].answer = e.target.value;
+  }}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' && questions[state].answer) {
+      setstate(() => state + 1);
+    }
+  }}
+      />
+      {/* <Input
       fullWidth
       bordered
       label="Car"
@@ -178,11 +203,24 @@ const Submit = () => {
           }
        return {text:res.title , value:res.title}
       })}
-      />
+      /> */}
       </>
       : state == 2 ?
       <>
       <Input
+      fullWidth
+      bordered
+      label="Model"
+       onChange={(e) => {
+    questions[state].answer = e.target.value;
+  }}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' && questions[state].answer) {
+      setstate(() => state + 1);
+    }
+  }}
+      />
+      {/* <Input
       fullWidth
       bordered
       label="Model"
@@ -200,7 +238,7 @@ const Submit = () => {
           }
        return {text:res.value , value:res.value}
       })}
-      />
+      /> */}
       </>
       : state == 3 ?
       <>
@@ -339,11 +377,12 @@ const Submit = () => {
         </div>
       </div>
 
+  </div>
+</div>
+
     <div className="margin-top-40 padding">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.678901234567!2d-89.12345678901234!3d39.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDA3JzI0LjQiTiA4OcKwMDcnMjQuNCJX!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" width="100%" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-  </div>
-</div>
     </div>
   )
 }

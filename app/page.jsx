@@ -17,7 +17,7 @@ import ListItem from 'funuicss/ui/list/Item'
 import {FunGet} from 'funuicss/js/Fun'
 import Alert from 'funuicss/ui/alert/Alert'
 import Nav from "@/components/Nav";
-import {PiChecks, PiDiamondsFour, PiGear, PiGoogleLogo, PiPhone, PiPlusCircle, PiSketchLogo, PiStarDuotone, PiUserCheck} from 'react-icons/pi'
+import {PiChecks, PiDiamondsFour, PiGear, PiGoogleLogo, PiPhone, PiPlusCircle, PiSketchLogo, PiStar, PiStarDuotone, PiStarFill, PiUserCheck} from 'react-icons/pi'
 import Footer from "@/components/Footer";
 import TextUi from "@/ui/Text";
 import SectionUI from "@/ui/section";
@@ -333,28 +333,26 @@ useEffect(() => {
           {
             reviews.map((doc, i) => (
               <div class="col sm-12 md-6 lg-6 padding" data-aos="fade-up" key={i}>
-                <div className="">
+               <RowFlexUi gap={1} justify='space-between'>
+                  <div className="">
                   <img src={doc.profile} className="width-50 circle" alt="" />
+                     <div class="article section">{doc.user}</div>
                 </div>
-                <h2 class="text-bold section">{doc.user}</h2>
+             <img src="/google.png" className="width-20" alt="" />
+               </RowFlexUi>
                 <p>
                   <RowFlexUi gap={2} justify='space-between'>
                     <div class="row-flex">
-                      <div class="h4 text-s"> <PiStarDuotone /></div>
-                      <div class="h4 text-s"> <PiStarDuotone /></div>
-                      <div class="h4 text-s"> <PiStarDuotone /></div>
+                      <div class="h4 text-yellow"> <PiStarFill /></div>
+                      <div class="h4 text-yellow"> <PiStarFill /></div>
+                      <div class="h4 text-yellow"> <PiStarFill /></div>
                       {
-                        doc.stars == "4" || doc.stars == '5' ? <div class="h4 text-s"> <PiStarDuotone /></div> : ''
+                        doc.stars == "4" || doc.stars == '5' ? <div class="h4 text-yellow"> <PiStarFill /></div> : ''
                       }
                       {
-                        doc.stars == "5" ? <div class="h4 text-s"> <PiStarDuotone /></div> : <div class="h4 text-dark"> <PiStarDuotone /></div>
+                        doc.stars == "5" ? <div class="h4 text-yellow"> <PiStarFill /></div> : <div class="h4 text-dark"> <PiStarDuotone /></div>
                       }
                     </div>
-                    <RowFlexUi gap={0.5}>
-                      <div className="text-bold text-dark400">
-                        {doc.stars} / 5
-                      </div>
-                    </RowFlexUi>
                   </RowFlexUi>
                   <div className="article text-dark200 text-italic">
                     {`"`} {doc.review} {`"`}
