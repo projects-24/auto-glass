@@ -1,4 +1,9 @@
-
+export const socialLinks = {
+   instagram:'' ,
+   facebook:'' ,
+   whatsapp:'' ,
+   tiktok:''
+}
 
 
 const allcars = [

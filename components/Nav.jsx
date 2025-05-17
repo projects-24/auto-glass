@@ -2,12 +2,13 @@
 import UiButton from '@/ui/button'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { PiCalendar, PiList, PiPhone, PiWhatsappLogo, PiX } from 'react-icons/pi'
+import { PiCalendar, PiFacebookLogo, PiInstagramLogo, PiList, PiPhone, PiTiktokLogo, PiWhatsappLogo, PiX } from 'react-icons/pi'
 import Image from 'next/image'
 import Logo from '@/ui/Logo'
 import RowFlexUi from '@/ui/RowFlex'
 import TextUi from '@/ui/Text'
 import LandbotLoader from './LandbotLoader'
+import { socialLinks } from '@/functions/Functions'
 export default function Nav() {
 
   const [showNav, setshowNav] = useState(false)
@@ -40,12 +41,13 @@ export default function Nav() {
   return (
     <div> 
       <LandbotLoader />
+     <Link href={socialLinks.whatsapp}>
       <div className="whatsappBtn">
         <PiWhatsappLogo size={25}/>
         <div>
          whatsApp Us
         </div>
-      </div>
+      </div></Link>
       <div class="navtop white">
           {/* Logo with Image */}
      <div >
@@ -55,7 +57,7 @@ export default function Nav() {
      </div>
     <div className='hide-small'>
       <RowFlexUi gap={1}>
-        <RowFlexUi gap={0.1}>
+        <RowFlexUi gap={0.1} alignItems='flex-end'>
           <PiPhone size={30} className='text-primary' />
         <div>
               <TextUi
@@ -76,7 +78,7 @@ export default function Nav() {
           />
         </div>
         </RowFlexUi>
-        <RowFlexUi gap={0.1}>
+        <RowFlexUi gap={0.1} alignItems='flex-end'>
           <PiPhone size={30} className='text-primary' />
         <div>
               <TextUi
@@ -129,7 +131,7 @@ export default function Nav() {
     
     }}>
  
-    <RowFlexUi gap={0.5} responsiveSmall>
+    <RowFlexUi gap={1} responsiveSmall>
       <a href="/" class="nav_link text-white  text-minified">Home</a>
       <a href="/about" class="nav_link text-white  text-minified">About</a>
       <a href="/#services" class="nav_link text-white  text-minified">Services</a>
@@ -137,7 +139,8 @@ export default function Nav() {
       <a href="/#contact" class="nav_link text-white  text-minified">Contact</a>
   </RowFlexUi>
  
-      <div>
+   <RowFlexUi gap={1} responsiveSmall>
+       <div>
         <Link href={"/contact"}>
         <UiButton 
       text={"Get a Quick Qoute"}
@@ -150,6 +153,25 @@ export default function Nav() {
         </Link>
     
       </div>
+      
+     <RowFlexUi gap={0.5} justify='center'>
+       <Link href={socialLinks.instagram}>
+         <PiInstagramLogo size={25} className='pointer text-white'/>
+      </Link>
+      <Link href={socialLinks.facebook}>
+         <PiFacebookLogo size={25} className='pointer text-white'/>
+      </Link>
+      <Link href={socialLinks.tiktok}>
+         <PiTiktokLogo size={25} className='pointer text-white'/>
+      </Link>
+      <Link href={socialLinks.whatsapp}>
+         <PiWhatsappLogo size={25} className='pointer text-white'/>
+      </Link>
+     </RowFlexUi>
+    </RowFlexUi>
+
+
+   
           <div className='show-small'>
       <RowFlexUi gap={1}>
         <RowFlexUi gap={0.1}>
@@ -173,8 +195,8 @@ export default function Nav() {
         </RowFlexUi>
       </RowFlexUi>
     </div>
-   
 
+  
   </div>
 </div>
   )

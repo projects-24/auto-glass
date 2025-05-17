@@ -155,6 +155,9 @@ useEffect(() => {
         ))
       }
     </div>
+       <div className="width-700-max fit center">
+      <img src="/images/service.png" className="fit" alt="" />
+    </div>
     <div className="row central">
       <div className="col sm-12 md-12 lg-4 padding">
         {
@@ -220,6 +223,9 @@ useEffect(() => {
       }
       </div>
     </div>
+
+
+ 
 </div>
 </div>
 <div id="services"></div>
@@ -240,8 +246,8 @@ useEffect(() => {
       <Animation>
         <RowFlexUi gap={4} justify='center' style={{flexWrap:"wrap"}}>
           <div className={`col sm-12 ${i % 2 === 0 ? 'md-6' : 'md-6 order-md-2'}`}>
-            <div className='product-image hover-up pointer'>
-              <img src={doc.image} alt={doc.name} className='fit ' />
+            <div className='product-image hover-up pointer text-center'>
+              <img src={doc.image} alt={doc.name} className='width-70-p  ' />
             </div>
           </div>
           <div className={`padding-20 col sm-12 ${i % 2 === 0 ? 'md-6' : 'md-6 order-md-1'}`}>

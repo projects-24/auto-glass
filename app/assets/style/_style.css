@@ -37,7 +37,7 @@ body{overflow-x: hidden !important;}
     line-height: 90% !important;
     /* color: var(--primary); */
 }
-img{
+.img{
     clip-path: polygon(4% 0, 100% 0%, 96% 100%, 0% 100%) !important;
 }
 .text-big , .text-bigger, .text-jumbo{

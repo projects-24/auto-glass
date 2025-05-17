@@ -1,6 +1,7 @@
+import { socialLinks } from '@/functions/Functions'
 import RowFlexUi from '@/ui/RowFlex'
 import React from 'react'
-import { PiFacebookLogo, PiInstagramLogo, PiMapPin, PiPhone, PiEnvelope, PiClock } from 'react-icons/pi'
+import { PiFacebookLogo, PiInstagramLogo, PiMapPin, PiPhone, PiEnvelope, PiClock, PiWhatsappLogo, PiTiktokLogo } from 'react-icons/pi'
 
 export default function Footer() {
   return (
@@ -71,11 +72,14 @@ export default function Footer() {
             <div className="h5 text-bold margin-bottom-20">Connect With Us</div>
             <p className="margin-bottom-20">Follow for maintenance tips and special offers</p>
             <RowFlexUi gap={1} justify='start'>
-              <a href="#" className="dark100 pointer hover-up central width-40 height-40 round border-light">
+              <a href={socialLinks.facebook} className="dark100 pointer hover-up central width-40 height-40 round border-light">
                 <PiFacebookLogo size={20}/>
               </a>
-              <a href="#" className="dark100 pointer hover-up central width-40 height-40 round border-light">
-                <PiInstagramLogo size={20}/>
+              <a href={socialLinks.tiktok} className="dark100 pointer hover-up central width-40 height-40 round border-light">
+                <PiTiktokLogo size={20}/>
+              </a>
+              <a href={socialLinks.whatsapp} className="dark100 pointer hover-up central width-40 height-40 round border-light">
+                <PiWhatsappLogo size={20}/>
               </a>
             </RowFlexUi>
             <div className="margin-top-20">

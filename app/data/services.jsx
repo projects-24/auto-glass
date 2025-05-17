@@ -3,7 +3,7 @@ export const Services = [
     name: "Windshield Repair",
     subtitle: "Stop small damage from becoming big problems",
     description: "Our advanced resin injection technology can repair chips and cracks up to 12 inches long, preventing the need for costly replacements in 90% of cases. Using UV-cured polymers that bond at the molecular level, we restore your windshield's original strength while maintaining perfect optical clarity. Most repairs take under 30 minutes and can prevent dangerous spreading that compromises your safety.",
-    image: "/images/services/windshield_repair.jpeg"
+    image: "/images/4.jpg"
   },
   {
     name: "Windshield Replacement",
@@ -21,7 +21,7 @@ export const Services = [
     name: "Rear Window Repair & Replacement",
     subtitle: "Clear visibility behind you",
     description: "Our rear glass services include careful antenna and defroster grid preservation, with special conductive epoxy repairs when needed. For hatchbacks and SUVs, we recalibrate the liftgate sensors after installation. We also offer factory-tinted glass options that match your vehicle's original solar rating, protecting your interior from UV damage while maintaining proper visibility.",
-    image: "/images/services/rear_window.jpeg"
+    image: "/images/2.jpg"
   },
   {
     name: "Emergency Auto Glass Services",
