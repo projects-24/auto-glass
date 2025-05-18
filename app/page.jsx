@@ -66,11 +66,11 @@ useEffect(() => {
   <div id="home"></div>
 
   <div className="home">
-  <div className="homeTab text-white">
+  <div className="homeTab text-white text-center center">
          <div >
     
          <TextUi
-              text="Your Safety, Our Priority"
+              text="Get you windshield repaired with 24/7"
               block
               lineHeight="100%"
               size="jumbo"
@@ -78,42 +78,29 @@ useEffect(() => {
             />
 
             {/* Highlighted Key Benefits */}
-                      <div
-                      className="article"
-          >
-              <RowFlexUi gap={0.5} funcss='section'>
-                <CircleUi size={1.4} bg={"white text-primary"} >
-                  <PiChecks  />
-                </CircleUi>
-                <div>
-                  We Pay Up To  100% Of Your Deductible
-                </div>
-              </RowFlexUi>
-              <RowFlexUi gap={0.5} funcss='section'>
-                 <CircleUi size={1.4} bg={"white text-primary"} >
-                  <PiChecks  />
-                </CircleUi>
-                <div>
-                Lifetime Auto Glass Repair Warranty
-                </div>
-              </RowFlexUi>
-              <RowFlexUi gap={0.5} funcss='section'>
-          <CircleUi size={1.4} bg={"white text-primary"} >
-                  <PiChecks  />
-                </CircleUi>
-                <div>
-                We Will Beat Any Competitor <span className="text-bold"> By 10%!</span>
-                </div>
-              </RowFlexUi>
-              <RowFlexUi gap={0.5} funcss='section'>
-            <CircleUi size={1.4} bg={"white text-primary"} >
-                  <PiChecks  />
-                </CircleUi>
-                <div>
-                Canadian Owned & Operated
-                </div>
-              </RowFlexUi>
-          </div>
+                  <div className="article section">
+  <div>
+    <div>
+      💸 We Pay Up To <strong>100%</strong> Of Your Deductible
+    </div>
+  </div>
+  <div>
+    <div>
+      🛡️ Lifetime Auto Glass Repair Warranty
+    </div>
+  </div>
+  <div>
+    <div>
+      🔧 We Will Beat Any Competitor <span className="text-bold">By 10%!</span>
+    </div>
+  </div>
+  <div>
+    <div>
+      🇨🇦 Canadian Owned & Operated
+    </div>
+  </div>
+</div>
+
 
             <div style={{ marginTop: "30px" }}>
            <Link href={"/contact"}>
@@ -245,7 +232,7 @@ useEffect(() => {
     <div key={i} className="padding margin-top-30">
       <Animation>
         <RowFlexUi gap={4} justify='center' style={{flexWrap:"wrap"}}>
-          <div className={`text-center col sm-12 ${i % 2 === 0 ? 'md-6' : 'md-6 order-md-2'}`}>
+          <div  className={`text-center col sm-12 ${i % 2 === 0 ? 'md-6' : 'md-6 order-md-2'}`}>
             <div className='product-image hover-up pointer '>
               <img src={doc.image} alt={doc.name} className='width-70-p  ' />
             </div>

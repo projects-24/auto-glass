@@ -1,8 +1,8 @@
 export const socialLinks = {
-   instagram:'' ,
-   facebook:'' ,
+   instagram:'https://www.instagram.com/autoglassgurus' ,
+   facebook:'https://www.facebook.com/share/16RWQJ3qRa/?mibextid=wwXIfr' ,
    whatsapp:'' ,
-   tiktok:''
+   tiktok:'https://www.tiktok.com/@autoglassgurus'
 }
 
 

@@ -2,10 +2,10 @@
 import React from 'react'
 import Button from 'funuicss/ui/button/Button'
 
-export default function UiButton({primary, secondary, text , ...rest}) {
+export default function UiButton({primary, secondary, text , qoute, ...rest}) {
   return primary ? <Button 
   flat
-  bg='primary' 
+  bg='p' 
   text={text || ''} 
   {...rest}
   /> : secondary ? <Button 
@@ -15,7 +15,7 @@ export default function UiButton({primary, secondary, text , ...rest}) {
   {...rest} 
   flat
   /> : <Button 
-
+  funcss={qoute ? 'quote-btn' : ''}
   text={text || ''}
   {...rest} 
   />

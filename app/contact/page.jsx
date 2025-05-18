@@ -331,7 +331,7 @@ const Submit = () => {
        
         </div>
         </div>
-        <div className="wrapper">
+        <div id='contact' className="wrapper">
 
   <div className="contain">
      

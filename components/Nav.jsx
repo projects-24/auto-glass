@@ -135,8 +135,9 @@ export default function Nav() {
       <a href="/" class="nav_link text-white  text-minified">Home</a>
       <a href="/about" class="nav_link text-white  text-minified">About</a>
       <a href="/#services" class="nav_link text-white  text-minified">Services</a>
+      <a href="/gallery" class="nav_link text-white  text-minified">Gallery</a>
       <a href="/#testimonials" class="nav_link text-white  text-minified">Testimonials</a>
-      <a href="/#contact" class="nav_link text-white  text-minified">Contact</a>
+      <a href="/contact#contact" class="nav_link text-white  text-minified">Contact</a>
   </RowFlexUi>
  
    <RowFlexUi gap={1} responsiveSmall>

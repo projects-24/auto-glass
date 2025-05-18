@@ -84,9 +84,7 @@ export default function Footer() {
             </RowFlexUi>
             <div className="margin-top-20">
               <div className="text-bold margin-bottom-5">Business Hours:</div>
-              <div>Monday-Friday: 8AM - 6PM</div>
-              <div>Saturday: 9AM - 4PM</div>
-              <div>Sunday: Emergency Only</div>
+              <div>Monday-Sunday: 24/7</div>
             </div>
           </div>
         </div>
