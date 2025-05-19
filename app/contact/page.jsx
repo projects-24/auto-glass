@@ -13,6 +13,7 @@ import { cars } from '@/functions/Functions';
 
 export default function Contact() {
   const [state, setstate] = useState(0)
+  const [showOther, setshowOther] = useState(false)
   const [questions, setquestions] = useState(
    [
   {
@@ -60,6 +61,46 @@ const years = Array.from({ length: currentYear - 1990 + 1 }, (_, i) => {
 const Submit = () => {
   console.log(questions)
 }
+
+const CarParts = [
+  {
+    text: "Windscreen",
+    value: "Windscreen"
+  },
+  {
+    text: "Rear Windscreen",
+    value: "Rear Windscreen"
+  },
+  {
+    text: "Front Door Glass",
+    value: "Front Door Glass"
+  } ,
+  {
+    text: "Driver Rear Door Glass",
+    value: "Driver Rear Door Glass"
+  } ,
+  {
+    text: "Passenger Rear Door Glass",
+    value: "Passenger Rear Door Glass"
+  },
+  {
+    text: "Front Quarter Glass",
+    value: "Front Quarter Glass"
+  },
+  {
+    text: "Driver Rear Quarter Glass",
+    value: "Driver Rear Quarter Glass"
+  },
+  {
+    text: "Passenger Rear Quarter Glass",
+    value: "Passenger Rear Quarter Glass"
+  },
+  {
+    text: "Rear Quarter Glass",
+    value: "Rear Quarter Glass"
+  }
+
+]
   return (
     <div>
         <Nav />
@@ -69,14 +110,14 @@ const Submit = () => {
         body={`     Let us help you with your auto glass needs. Contact us today to schedule your repair or replacement!`}
         />
 
-        <div style={{minHeight:"90vh"}} className='flex padding-20 central dark900 text-dark round-edge'>
+        <div style={{minHeight:"100vh"}} className='flex padding-20  dark900 text-dark round-edge'>
    <div className="width-600-max center">
    <div className="text-center section margin-bottom-50">
      {
      <>
       <TextUi
       text={questions[state].question}
-      size='big'
+      size='bigger'
       />
       <p className='article'>
         {questions[state].subtitle || ''}
@@ -87,7 +128,54 @@ const Submit = () => {
     {
       state == 0 ?
       <div>
-           <div onClick={() => {
+        {
+          showOther ?
+          <>
+             <Input
+      fullWidth
+      bordered
+      id="problem"
+      label="Specify the problem?"
+       onChange={(e) => {
+    questions[state].answer = e.target.value;
+  }}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' && questions[state].answer) {
+      setstate(() => state + 1);
+    }
+  }}
+      />
+          </>
+          :
+          <div>
+         
+          <select
+            onChange={(e) => {
+              const selectedValue = e.target.value;
+              if (selectedValue === "Other") {
+                setshowOther(true);
+              } else {
+                questions[0].answer = selectedValue;
+                setstate(() => state + 1);
+              }
+            }}
+            className='input section central borderedInput pointer hover-up round-edge full-width'
+          >
+                <option value="">Select a part</option>
+            {CarParts.map((item, index) => (
+              <option key={index} value={item.value}>
+                {item.text}
+              </option>
+            ))}
+            <option value="Other">Other</option>
+          </select>
+
+           <div>
+            <img src="/images/parts.jpg" className='width-100-p round-edge' alt="" />
+          </div>
+          </div>
+        }
+           {/* <div onClick={() => {
               questions[0].answer = 'Front Windscreen'
               setstate(() => state + 1)
             }} className='primary flex center central pointer hover-up round-edge'
@@ -169,7 +257,7 @@ const Submit = () => {
               heading='h5'
               color={'white'}
               />
-            </div>
+            </div> */}
       </div>
       : state == 1 ?
       <>

@@ -70,7 +70,7 @@ useEffect(() => {
          <div >
     
          <TextUi
-              text="Get you windshield repaired with 24/7"
+              text="Get you windshield repaired"
               block
               lineHeight="100%"
               size="jumbo"
