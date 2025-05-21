@@ -95,7 +95,10 @@ position: relative;
     z-index: 1;
 
 }
+
+.company_image{width: 80%;}
 @media(max-width:800px){
+    .company_image{width: 100%;}
     .homeTab{
         max-width: 100%;
         width: 100%;

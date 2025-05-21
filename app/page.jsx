@@ -248,7 +248,7 @@ useEffect(() => {
         <RowFlexUi gap={4} justify='center' style={{flexWrap:"wrap"}}>
           <div  className={`text-center col sm-12 ${i % 2 === 0 ? 'md-6' : 'md-6 order-md-2'}`}>
             <div className='product-image hover-up pointer '>
-              <img src={doc.image} alt={doc.name} className='width-70-p  ' />
+              <img src={doc.image} alt={doc.name} width={"company_image"} />
             </div>
           </div>
           <div className={`padding-20 col sm-12 ${i % 2 === 0 ? 'md-6' : 'md-6 order-md-1'}`}>
