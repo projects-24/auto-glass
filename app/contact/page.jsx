@@ -30,6 +30,16 @@ export default function Contact() {
     subject: '',
     phone: '',
   });
+const [attachmentBase64, setAttachmentBase64] = useState('');
+
+// const handleFileChange = (e) => {
+//   const file = e.target.files[0];
+//   const reader = new FileReader();
+//   reader.onloadend = () => {
+//     setAttachmentBase64(reader.result.split(',')[1]); // Strip the "data:image/png;base64," prefix
+//   };
+//   if (file) reader.readAsDataURL(file);
+// };
 
   const CarParts = [
     "Windscreen",
@@ -72,10 +82,11 @@ const Submit = () => {
   }
 
   setisLoading(true);
-
+  let testEmail =  "abdulwahabiddris08@gmail.com" 
   const templateParams = {
   email: companyEmail,
   name: form.name,
+  //  'my_file': attachmentBase64 ,
   message: `
 🔧 NEW WINDSHIELD REPAIR QUOTE REQUEST 🔧
 
@@ -204,6 +215,9 @@ const Submit = () => {
           <Input fullWidth bordered label="Car Make" onChange={handleChange('make')} value={form.make} />
                     <div className="section"></div>
           <Input fullWidth bordered label="Model" onChange={handleChange('model')} value={form.model} />
+                  {/* <div className="section"></div>
+          <Input fullWidth bordered label="Attachment" type="file" accept="image/*" onChange={handleFileChange} /> */}
+
                   <div className="section"></div>
           <Input
             fullWidth

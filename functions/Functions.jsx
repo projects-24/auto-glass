@@ -5695,3 +5695,31 @@ const allcars = [
 export const cars = () => {
 return allcars
 }
+
+
+
+
+export const locations = [
+  "Toronto",
+  "Mississauga",
+  "Streetsville",
+  "Port Credit",
+  "Erin Mills",
+  "Meadowvale",
+  "Lorne Park",
+  "Clarkson",
+  "Oakville",
+  "Burlington",
+  "Hamilton",
+  "Milton",
+  "Stoney Creek",
+  "Grimsby",
+  "Ancaster",
+  "Brantford",
+  "Cambridge",
+  "Guelph",
+  "Halton Hills",
+  "Kitchener",
+  "Paris, ON",
+  "Copetown"
+]

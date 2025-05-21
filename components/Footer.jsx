@@ -1,11 +1,11 @@
-import { socialLinks } from '@/functions/Functions'
+import { locations, socialLinks } from '@/functions/Functions'
 import RowFlexUi from '@/ui/RowFlex'
 import React from 'react'
 import { PiFacebookLogo, PiInstagramLogo, PiMapPin, PiPhone, PiEnvelope, PiClock, PiWhatsappLogo, PiTiktokLogo } from 'react-icons/pi'
 
 export default function Footer() {
   return (
-    <div className="dark padding-20">
+    <div className="dark text-minified  padding-20" style={{lineHeight:"1.5rem"}}>
       <div >
         {/* Main Footer Content */}
         <div className="row space-between padding-bottom-40">
@@ -25,33 +25,43 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="col sm-12 md-6 lg-3 padding-10">
             <div className="h5 text-bold margin-bottom-20">Contact Info</div>
-            <div className="flex align-start margin-bottom-15">
-              <PiMapPin className="margin-right-10 margin-top-3" />
-              <div>
+            <div className="margin-bottom-15">
+              <RowFlexUi gap={0.5}>
                 <div className="text-bold">Address:</div>
-                <div>123 AutoGlass Gurus, Toronto</div>
-                <div className="text-bold margin-top-10">Location:</div>
-                <div>Toronto, Canada</div>
-              </div>
+                <div>16 Taber Rd, Etobicoke, ON M9W 3A5</div>
+              </RowFlexUi>
             </div>
             <div className="flex align-center margin-bottom-15">
               <PiPhone className="margin-right-10" />
-              <div>
+              <RowFlexUi gap={0.5}>
                 <div className="text-bold">Call Us:</div>
                 <div>+1 647-708-4226</div>
-              </div>
+              </RowFlexUi>
             </div>
             <div className="flex align-center margin-bottom-15">
               <PiEnvelope className="margin-right-10" />
-              <div>
+              <RowFlexUi gap={0.5}>
                 <div className="text-bold">Email:</div>
                 <div>info@autoglassgurus.ca</div>
-              </div>
+              </RowFlexUi>
             </div>
             <div className="flex align-center">
               <PiClock className="margin-right-10" />
               <div className="text-bold">24/7 Emergency Service</div>
             </div>
+<div className="section"></div>
+                        {
+                          locations.map((res) => {
+                            return (
+                              <div key={res} className="flex align-center article margin-bottom-15">
+                                <PiMapPin className="margin-right-10" />
+                                <div>
+                                  <div className="text-bold">{res}</div>
+                                </div>
+                              </div>
+                            )
+                          })
+                        }
           </div>
 
           {/* Why Choose Us */}
