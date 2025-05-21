@@ -115,6 +115,18 @@ useEffect(() => {
       />
         </Link>
             </div>
+            <div className="text-center " style={{ marginTop: "30px" }}>
+             <div>
+               <TextUi text='call us now!' color='white'/>
+             </div>
+           <Link href={"tel:+19052264226"}>
+        <UiButton 
+        startIcon={<PiPhone />}
+        color='white'
+        big
+      text={  <TextUi text='+19052264226' color='white' heading='h2' light/> }  />
+        </Link>
+            </div>
           
     
 

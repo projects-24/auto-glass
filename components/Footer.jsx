@@ -35,7 +35,7 @@ export default function Footer() {
               <PiPhone className="margin-right-10" />
               <RowFlexUi gap={0.5}>
                 <div className="text-bold">Call Us:</div>
-                <div>+1 647-708-4226</div>
+                <div>+19052264226</div>
               </RowFlexUi>
             </div>
             <div className="flex align-center margin-bottom-15">

@@ -91,7 +91,6 @@ export default function Nav() {
               <TextUi
           text="+1 (905) 226-4226"
           heading='h5'
-          funcss='hide-small'
           />
               <TextUi
           text="+1 (905) 226-4226"
