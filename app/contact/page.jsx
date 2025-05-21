@@ -41,6 +41,7 @@ export default function Contact() {
     "Driver Rear Quarter Glass",
     "Passenger Rear Quarter Glass",
     "Rear Quarter Glass",
+    "chip repair",
     "Other"
   ];
 
