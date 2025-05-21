@@ -64,7 +64,6 @@ const Submit = () => {
     !form.make ||
     !form.model ||
     !form.year ||
-    !form.registration ||
     !form.part
   ) {
     alert('Please fill all required fields before submitting.');
@@ -91,7 +90,6 @@ const Submit = () => {
 🏷️ Make       : ${form.make}
 🚘 Model      : ${form.model}
 📅 Year       : ${form.year}
-🔢 Registration: ${form.registration}
 
 🛠️ REPAIR REQUEST
 ========================
@@ -123,7 +121,6 @@ const Submit = () => {
         make: '',
         model: '',
         year: '',
-        registration: '',
         email: '',
         name: '',
         subject: '',
@@ -216,9 +213,7 @@ const Submit = () => {
             onChange={handleChange('year')}
             value={form.year}
           />
-          <div className="section"></div>
-          <Input fullWidth bordered label="Registration Number" onChange={handleChange('registration')} value={form.registration} />
-
+  
           {/* Personal Information */}
           <RowFlexUi responsiveSmall gap={1} funcss="section">
             <div className="col">
