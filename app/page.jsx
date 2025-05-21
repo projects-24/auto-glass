@@ -68,7 +68,7 @@ useEffect(() => {
   <div className="home">
   <div className="homeTab text-white text-center center">
          <div >
-    
+       
          <TextUi
               text="Get you windshield repaired"
               block
@@ -115,6 +115,8 @@ useEffect(() => {
       />
         </Link>
             </div>
+          
+    
 
          </div>
           </div>

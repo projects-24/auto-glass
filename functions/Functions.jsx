@@ -1,10 +1,11 @@
 export const socialLinks = {
    instagram:'https://www.instagram.com/autoglassgurus' ,
    facebook:'https://www.facebook.com/share/16RWQJ3qRa/?mibextid=wwXIfr' ,
-   whatsapp:'' ,
+   whatsapp:'http://wa.me/19052264226' ,
    tiktok:'https://www.tiktok.com/@autoglassgurus'
 }
 
+export let companyEmail = "info@autoglassgurus.ca"
 
 const allcars = [
    {

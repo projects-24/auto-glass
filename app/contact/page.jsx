@@ -8,417 +8,267 @@ import IconicInput from 'funuicss/ui/input/Iconic'
 import RowFlexUi from '@/ui/RowFlex';
 import UiButton from '@/ui/button';
 import TextUi from '@/ui/Text';
-import { cars } from '@/functions/Functions';
-
+import { cars, companyEmail } from '@/functions/Functions';
+import emailjs from '@emailjs/browser';
+import Loader from '@/ui/Loader';
+import Alert from 'funuicss/ui/alert/Alert'
 
 export default function Contact() {
-  const [state, setstate] = useState(0)
+  const [message, setmessage] = useState(0)
+  const [alert_state, setalert_state] = useState("")
   const [showOther, setshowOther] = useState(false)
-  const [questions, setquestions] = useState(
-   [
-  {
-    question: "Which car glass needs replacement?",
-    answer: "",
-    subtitle: "Specify the damaged glass part, e.g., front windshield, rear window, or side glass."
-  },
-  {
-    question: "Which car Make?",
-    answer: "",
-    subtitle: "Select the brand or manufacturer of your vehicle, such as Toyota, Ford, or BMW."
-  },
-  {
-    question: "Select car model",
-    answer: "",
-    subtitle: "Choose the specific model of your car, like Corolla, Camry, or F-150."
-  },
-  {
-    question: "Vehicle Year",
-    answer: "",
-    subtitle: "Enter the year your car was manufactured, such as 2015 or 2022."
-  },
-  {
-    question: "Vehicle Registration number",
-    answer: "",
-    subtitle: "Provide your car's license plate or registration number for identification."
-  },
-  {
-    question: "Enter your personal information",
-    answer: "",
-    subtitle: "Fill in your name, phone number, and any other required contact details."
-  }
-]
+  const [isLoading, setisLoading] = useState(false)
+  const [form, setForm] = useState({
+    part: '',
+    otherPart: '',
+    make: '',
+    model: '',
+    year: '',
+    registration: '',
+    email: '',
+    name: '',
+    subject: '',
+    phone: '',
+  });
 
-)
+  const CarParts = [
+    "Windscreen",
+    "Rear Windscreen",
+    "Front Door Glass",
+    "Driver Rear Door Glass",
+    "Passenger Rear Door Glass",
+    "Front Quarter Glass",
+    "Driver Rear Quarter Glass",
+    "Passenger Rear Quarter Glass",
+    "Rear Quarter Glass",
+    "Other"
+  ];
 
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: currentYear - 1990 + 1 }, (_, i) => {
+    const year = 1990 + i;
+    return { text: year.toString(), value: year.toString() };
+  });
 
-const currentYear = new Date().getFullYear();
-const years = Array.from({ length: currentYear - 1990 + 1 }, (_, i) => {
-  const year = 1990 + i;
-  return { text: year.toString(), value: year.toString() };
-});
-
+  const handleChange = (name) => (e) => {
+    setForm({ ...form, [name]: e.target.value });
+  };
 
 const Submit = () => {
-  console.log(questions)
-}
-
-const CarParts = [
-  {
-    text: "Windscreen",
-    value: "Windscreen"
-  },
-  {
-    text: "Rear Windscreen",
-    value: "Rear Windscreen"
-  },
-  {
-    text: "Front Door Glass",
-    value: "Front Door Glass"
-  } ,
-  {
-    text: "Driver Rear Door Glass",
-    value: "Driver Rear Door Glass"
-  } ,
-  {
-    text: "Passenger Rear Door Glass",
-    value: "Passenger Rear Door Glass"
-  },
-  {
-    text: "Front Quarter Glass",
-    value: "Front Quarter Glass"
-  },
-  {
-    text: "Driver Rear Quarter Glass",
-    value: "Driver Rear Quarter Glass"
-  },
-  {
-    text: "Passenger Rear Quarter Glass",
-    value: "Passenger Rear Quarter Glass"
-  },
-  {
-    text: "Rear Quarter Glass",
-    value: "Rear Quarter Glass"
+  // Validate required fields
+  if (
+    !form.name ||
+    !form.email ||
+    !form.phone ||
+    !form.subject ||
+    !form.make ||
+    !form.model ||
+    !form.year ||
+    !form.registration ||
+    !form.part
+  ) {
+    alert('Please fill all required fields before submitting.');
+    return;
   }
 
-]
+  setisLoading(true);
+
+  const templateParams = {
+  email: companyEmail,
+  name: form.name,
+  message: `
+🔧 NEW WINDSHIELD REPAIR QUOTE REQUEST 🔧
+
+📌 CLIENT INFORMATION
+========================
+👤 Name       : ${form.name}
+📧 Email      : ${form.email}
+📞 Phone      : ${form.phone}
+📝 Subject    : ${form.subject}
+
+🚗 VEHICLE DETAILS
+========================
+🏷️ Make       : ${form.make}
+🚘 Model      : ${form.model}
+📅 Year       : ${form.year}
+🔢 Registration: ${form.registration}
+
+🛠️ REPAIR REQUEST
+========================
+🧩 Requested Part : ${form.part}
+🗒️ Additional Notes: ${form.otherPart || 'None'}
+
+📍 Submitted via the company website.
+    `,
+};
+
+
+  emailjs
+    .send(
+      'service_ckthctb',        // Your EmailJS service ID
+      'template_e415yhv',       // Your EmailJS template ID
+      templateParams,
+      'Cs-Lc0t9aVCayuZ_Q'       // Your EmailJS public key
+    )
+    .then((res) => {
+
+      // Show success message
+      setmessage('Quote request submitted successfully!, We will contact you soon.');
+      setalert_state('success');
+
+      // Clear form
+      setForm({
+        part: '',
+        otherPart: '',
+        make: '',
+        model: '',
+        year: '',
+        registration: '',
+        email: '',
+        name: '',
+        subject: '',
+        phone: '',
+      });
+
+      // Stop loading
+      setisLoading(false);
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        setmessage('');
+        setalert_state(false);
+      }, 5000);
+    })
+    .catch((err) => {
+      console.error('Email sending failed:', err);
+      setmessage('Failed to submit quote. Please try again.');
+      setalert_state('error');
+      setisLoading(false);
+
+      setTimeout(() => {
+        setmessage('');
+        setalert_state(false);
+      }, 5000);
+    });
+};
+
+
+
   return (
     <div>
+      {
+        message && 
+      <Alert fixed="top-middle" card message={message} type={alert_state || "info"}/>
+      }
+      {
+        isLoading && 
+        <Loader />
+      }
         <Nav />
 
         <Hero
         hero={"Get a free qoute online"}
         body={`     Let us help you with your auto glass needs. Contact us today to schedule your repair or replacement!`}
         />
+  <div style={{ minHeight: "100vh" }} className="flex padding-20 dark900 text-dark round-edge">
+        <div className="width-600-max center">
+               <RowFlexUi gap={1} justify='center'>
+            <img className="width-90" src="/reviewed.png" alt="" />
+            <img className="width-90" src="/guaranteed.png" alt="" />
+          </RowFlexUi>
+          <div className="text-center section margin-bottom-50">
+            <TextUi text="Request A Quote" size="bigger" />
+            <p className="article">Fill in your details below to get started</p>
+          </div>
 
-        <div style={{minHeight:"100vh"}} className='flex padding-20  dark900 text-dark round-edge'>
-   <div className="width-600-max center">
-   <div className="text-center section margin-bottom-50">
-     {
-     <>
-      <TextUi
-      text={questions[state].question}
-      size='bigger'
-      />
-      <p className='article'>
-        {questions[state].subtitle || ''}
-      </p>
-     </>
-    }
-   </div>
-    {
-      state == 0 ?
-      <div>
-        {
-          showOther ?
-          <>
-             <Input
-      fullWidth
-      bordered
-      id="problem"
-      label="Specify the problem?"
-       onChange={(e) => {
-    questions[state].answer = e.target.value;
-  }}
-  onKeyDown={(e) => {
-    if (e.key === 'Enter' && questions[state].answer) {
-      setstate(() => state + 1);
-    }
-  }}
-      />
-          </>
-          :
-          <div>
-         
+          {/* Car part selection */}
           <select
-            onChange={(e) => {
-              const selectedValue = e.target.value;
-              if (selectedValue === "Other") {
-                setshowOther(true);
-              } else {
-                questions[0].answer = selectedValue;
-                setstate(() => state + 1);
-              }
-            }}
-            className='input section central borderedInput pointer hover-up round-edge full-width'
+            className="input section central borderedInput pointer hover-up round-edge full-width"
+            onChange={handleChange('part')}
           >
-                <option value="">Select a part</option>
-            {CarParts.map((item, index) => (
-              <option key={index} value={item.value}>
-                {item.text}
-              </option>
+            <option value="">Select damaged glass part</option>
+            {CarParts.map((part, i) => (
+              <option key={i} value={part}>{part}</option>
             ))}
-            <option value="Other">Other</option>
           </select>
 
-           <div>
-            <img src="/images/parts.jpg" className='width-100-p round-edge' alt="" />
-          </div>
-          </div>
-        }
-           {/* <div onClick={() => {
-              questions[0].answer = 'Front Windscreen'
-              setstate(() => state + 1)
-            }} className='primary flex center central pointer hover-up round-edge'
-            style={{height:"100px" , width:"60%"}}
-            >
-              <TextUi
-              text="Front Windscreen"
-              heading='h5'
-              color={'white'}
-              />
-            </div>
-        <RowFlexUi>
-          <div className="col">
-            <div onClick={() => {
-              questions[0].answer = 'Passenger Front'
-              setstate(() => state + 1)
-            }} className='primary flex central pointer hover-up round-edge'
-            style={{height:"100px"}}
-            >
-              <TextUi
-              text="Passenger Front"
-              heading='h5'
-              color={'white'}
-              />
-            </div>
-            <div className="section"></div>
-            <div  onClick={() => {
-              questions[0].answer = 'Passenger Rear'
-              setstate(() => state + 1)
-            }} className='primary flex central pointer hover-up round-edge'
-            style={{height:"100px"}}
-            >
-              <TextUi
-              text="Passenger Rear"
-              heading='h5'
-              color={'white'}
-              />
-            </div>
-          </div>
-          <div className="col text-center">
-            <img src="/car.svg" className='height-300' alt="" />
-          </div>
-              <div className="col">
-            <div onClick={() => {
-              questions[0].answer = 'Driver Front'
-              setstate(() => state + 1)
-            }} className='primary flex central pointer hover-up round-edge'
-            style={{height:"100px"}}
-            >
-              <TextUi
-              text="Driver Front"
-              heading='h5'
-              color={'white'}
-              />
-            </div>
-            <div className="section"></div>
-            <div  onClick={() => {
-              questions[0].answer = 'Driver Rear'
-              setstate(() => state + 1)
-            }} className='primary flex central pointer hover-up round-edge'
-            style={{height:"100px"}}
-            >
-              <TextUi
-              text="Driver Rear"
-              heading='h5'
-              color={'white'}
-              />
-            </div>
-          </div>
-        </RowFlexUi>
-           <div onClick={() => {
-              questions[0].answer = 'Rear Windscreen'
-              setstate(() => state + 1)
-            }} className='primary flex center central pointer hover-up round-edge'
-            style={{height:"100px" , width:"60%"}}
-            >
-              <TextUi
-              text="Rear Windscreen"
-              heading='h5'
-              color={'white'}
-              />
-            </div> */}
-      </div>
-      : state == 1 ?
-      <>
-         <Input
-      fullWidth
-      bordered
-      label="Car Make"
-       onChange={(e) => {
-    questions[state].answer = e.target.value;
-  }}
-  onKeyDown={(e) => {
-    if (e.key === 'Enter' && questions[state].answer) {
-      setstate(() => state + 1);
-    }
-  }}
-      />
-      {/* <Input
-      fullWidth
-      bordered
-      label="Car"
-      select 
-      onChange={(e) => { 
-        questions[state].answer = e.target.value
-             if(e.target.value){
-               setstate(() => state + 1)
-        }
-       }}
-      options={cars().map((res , i) => {
-         if(i === 0){
-            return {text:"select car model" , value:""}
-          }
-       return {text:res.title , value:res.title}
-      })}
-      /> */}
-      </>
-      : state == 2 ?
-      <>
-      <Input
-      fullWidth
-      bordered
-      label="Model"
-       onChange={(e) => {
-    questions[state].answer = e.target.value;
-  }}
-  onKeyDown={(e) => {
-    if (e.key === 'Enter' && questions[state].answer) {
-      setstate(() => state + 1);
-    }
-  }}
-      />
-      {/* <Input
-      fullWidth
-      bordered
-      label="Model"
-      select 
-      onChange={(e) => { 
-        questions[state].answer = e.target.value
-        if(e.target.value){
-               setstate(() => state + 1)
-        }
-       }}
-      options={cars().find((res) => res.title === questions[1].answer).models
-        .map((res , i) => {
-          if(i === 0){
-            return {text:"select car model" , value:""}
-          }
-       return {text:res.value , value:res.value}
-      })}
-      /> */}
-      </>
-      : state == 3 ?
-      <>
-<Input
-  fullWidth
-  bordered
-  label="Model Year"
-  select
-  onChange={(e) => {
-    questions[state].answer = e.target.value;
-    if (e.target.value) {
-      setstate(() => state + 1);
-    }
-  }}
-  options={[
-    { text: "Select model year", value: "" },
-    ...Array.from({ length: new Date().getFullYear() - 1990 + 1 }, (_, i) => {
-      const year = 1990 + i;
-      return { text: year.toString(), value: year.toString() };
-    })
-  ]}
-/>
-      </>
-      : state == 4 ?
-      <>
-<Input
-  fullWidth
-  bordered
-  label="Enter your vehicle number"
-  type="text"
-  onChange={(e) => {
-    questions[state].answer = e.target.value;
-  }}
-  onKeyDown={(e) => {
-    if (e.key === 'Enter' && questions[state].answer) {
-      setstate(() => state + 1);
-    }
-  }}
-/>
+          {form.part === "Other" && (
+            <Input
+              fullWidth
+              bordered
+              label="Specify the problem"
+              value={form.otherPart}
+              onChange={handleChange('otherPart')}
+            />
+          )}
 
-      </>
-      : <>
-           <RowFlexUi responsiveSmall gap={1} funcss='section'>
+          {/* Car details */}
+          <Input fullWidth bordered label="Car Make" onChange={handleChange('make')} value={form.make} />
+                    <div className="section"></div>
+          <Input fullWidth bordered label="Model" onChange={handleChange('model')} value={form.model} />
+                  <div className="section"></div>
+          <Input
+            fullWidth
+            bordered
+            label="Year"
+            select
+            options={[{ text: "Select year", value: "" }, ...years]}
+            onChange={handleChange('year')}
+            value={form.year}
+          />
+          <div className="section"></div>
+          <Input fullWidth bordered label="Registration Number" onChange={handleChange('registration')} value={form.registration} />
+
+          {/* Personal Information */}
+          <RowFlexUi responsiveSmall gap={1} funcss="section">
             <div className="col">
-                <IconicInput 
-    funcss=" full-width" 
-    leftIcon={ <PiPaperPlaneRight className='text-primary' />}
-    input={<Input type="email" label="Email" funcss="full-width" bordered />}
-     />
+              <IconicInput
+                funcss=" full-width"
+                leftIcon={<PiPaperPlaneRight className="text-primary" />}
+                input={<Input type="email" label="Email" funcss="full-width" bordered value={form.email} onChange={handleChange('email')} />}
+              />
             </div>
             <div className="col">
-                <IconicInput 
-    funcss=" full-width" 
-    leftIcon={ <PiUser className='text-primary' />}
-    input={<Input type="text" label="Full Name" funcss="full-width" bordered />}
-     />
+              <IconicInput
+                funcss=" full-width"
+                leftIcon={<PiUser className="text-primary" />}
+                input={<Input type="text" label="Full Name" funcss="full-width" bordered value={form.name} onChange={handleChange('name')} />}
+              />
             </div>
-        </RowFlexUi>
-        <RowFlexUi responsiveSmall gap={1} funcss='section'>
+          </RowFlexUi>
+
+          <RowFlexUi responsiveSmall gap={1} funcss="section">
             <div className="col">
-                <IconicInput 
-    funcss=" full-width" 
-    leftIcon={ <PiTextAlignCenter className='text-primary' />}
-    input={<Input type="text" label="Subject" funcss="full-width" bordered />}
-     />
+              <IconicInput
+                funcss=" full-width"
+                leftIcon={<PiTextAlignCenter className="text-primary" />}
+                input={<Input type="text" label="Subject" funcss="full-width" bordered value={form.subject} onChange={handleChange('subject')} />}
+              />
             </div>
             <div className="col">
-                <IconicInput 
-    funcss=" full-width" 
-    leftIcon={ <PiPhone className='text-primary' />}
-    input={<Input type="text" label="Phone" funcss="full-width" bordered />}
-     />
+              <IconicInput
+                funcss=" full-width"
+                leftIcon={<PiPhone className="text-primary" />}
+                input={<Input type="text" label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} />}
+              />
             </div>
-        </RowFlexUi>
-          
-            <div className="section text-center">
-                    <UiButton 
-                      text={"SUBMIT YOUR REQUEST"}
-                      endIcon={<PiPaperPlane />}
-                      bg='primary'
-                        fillAnimation 
-                   outlined 
-                   outlineSize={0.1}
-                   fillTextColor='dark900' 
-                   onClick={Submit}
-                      />
-            </div>
-      </>
-    }
-       
+          </RowFlexUi>
+
+          <div className="section text-center">
+            <UiButton
+            fullWidth
+              text="SUBMIT YOUR REQUEST"
+              endIcon={<PiPaperPlane />}
+              bg="primary"
+              fillAnimation
+              outlined
+              outlineSize={0.1}
+              fillTextColor="dark900"
+              onClick={Submit}
+            />
+          </div>
         </div>
-        </div>
+      </div>
         <div id='contact' className="wrapper">
 
   <div className="contain">
