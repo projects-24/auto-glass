@@ -27,13 +27,13 @@ export const Services = [
     name: "Emergency Auto Glass Services",
     subtitle: "24/7 protection when you need it most",
     description: "Our rapid-response teams carry mobile glass inventories for over 200 common vehicles, meaning 75% of replacements can be completed on-site immediately. For after-hours emergencies, we provide temporary weatherproofing solutions using professional-grade sealing films that protect your interior until permanent repairs can be made. All emergency service vehicles are equipped with proper lighting and tools for safe nighttime operations.",
-    image: "/images/services/emergency.jpeg"
+    image: "/1.png"
   },
   {
     name: "ADAS Calibration",
     subtitle: "Keep your safety systems working perfectly",
     description: "Using OEM-approved calibration targets and diagnostic software, we ensure your forward collision warning, lane departure alerts, and automatic emergency braking systems function with millimeter precision. Our climate-controlled calibration bay provides ideal conditions for camera alignment, and we road-test every vehicle to verify system accuracy. We maintain calibration specs for over 3,000 vehicle models from 2012 to present.",
-    image: "/1.png"
+    image: "/5.jpg"
   }
 ];
 export const autoGlassData = [
