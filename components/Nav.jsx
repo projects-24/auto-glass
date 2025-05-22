@@ -2,7 +2,7 @@
 import UiButton from '@/ui/button'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { PiCalendar, PiFacebookLogo, PiInstagramLogo, PiList, PiPhone, PiTiktokLogo, PiWhatsappLogo, PiX } from 'react-icons/pi'
+import { PiCalendar, PiFacebookLogo, PiInstagramLogo, PiList, PiNote, PiPhone, PiTiktokLogo, PiWhatsappLogo, PiX } from 'react-icons/pi'
 import Image from 'next/image'
 import Logo from '@/ui/Logo'
 import RowFlexUi from '@/ui/RowFlex'
@@ -41,13 +41,15 @@ export default function Nav() {
   return (
     <div> 
       <LandbotLoader />
-     <Link href={socialLinks.whatsapp}>
+     <div className="hide-small">
+      <Link href={socialLinks.whatsapp}>
       <div className="whatsappBtn">
         <PiWhatsappLogo size={25}/>
         <div>
          whatsApp Us
         </div>
       </div></Link>
+     </div>
       <div class="navtop white">
           {/* Logo with Image */}
      <div >
@@ -197,6 +199,41 @@ export default function Nav() {
     </div>
 
   
+  </div>
+  <div className="bottomNav">
+      <a href="tel:+1 647-708-4226">
+    <div className='text-bold text-center'>
+   <PiPhone className='text-white' size={25} />
+        <div>
+          <TextUi
+            text="Call Us"
+            color={"white"}
+          />
+        </div>
+    </div>
+      </a>
+      <a href={socialLinks.whatsapp}>
+    <div className='text-bold text-center'>
+    <PiWhatsappLogo className='text-white' size={25} />
+        <div>
+          <TextUi
+            text="Text Us"
+            color={"white"}
+          />
+        </div>
+    </div>
+      </a>
+      <a href={'/contact'}>
+    <div className='text-bold text-center'>
+    <PiNote className='text-white' size={25} />
+        <div>
+          <TextUi
+            text="Qoute"
+            color={"white"}
+          />
+        </div>
+    </div>
+      </a>
   </div>
 </div>
   )

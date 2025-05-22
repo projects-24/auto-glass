@@ -9,13 +9,13 @@ export const Services = [
     name: "Windshield Replacement",
     subtitle: "Your safety is our top priority",
     description: "We exclusively use OEM-equivalent glass that meets or exceeds original manufacturer specifications for optical clarity, acoustic performance, and structural integrity. Our certified technicians follow strict installation protocols using premium urethane adhesives that require precise curing times. This ensures your new windshield provides the full 45% of structural support your vehicle's roof needs in a rollover accident, just as the engineers designed it.",
-    image: "/3.jpg"
+    image: "/2.png"
   },
   {
     name: "Side Window Repair & Replacement",
     subtitle: "Restore security and comfort",
     description: "Whether it's a stuck regulator, broken motor, or shattered glass, our side window services include complete track realignment and weatherproofing tests. We use factory-style moulding clips and butyl tape seals that prevent wind noise and water leaks. For luxury vehicles, we can program new window modules to maintain your auto-up/down features and pinch protection systems.",
-    image: "/2.png"
+    image: "/6.jpg"
   },
   {
     name: "Rear Window Repair & Replacement",

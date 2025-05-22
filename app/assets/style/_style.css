@@ -95,7 +95,7 @@ position: relative;
     z-index: 1;
 
 }
-
+.bottomNav{display: none;}
 .company_image{width: 80%;}
 @media(max-width:800px){
     .company_image{width: 100%;}
@@ -114,6 +114,18 @@ position: relative;
     }
     .home::after { 
     background: linear-gradient(to top, rgba(5, 61, 112 , 1),  rgba(5, 61, 112 , 0.5)); /* Add your desired end color */
+}
+.bottomNav{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--p);
+    padding: 0.5rem 0;
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 }
 /* Background color classes */
