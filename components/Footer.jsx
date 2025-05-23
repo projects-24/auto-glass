@@ -6,7 +6,7 @@ import { PiFacebookLogo, PiInstagramLogo, PiMapPin, PiPhone, PiEnvelope, PiClock
 export default function Footer() {
   return (
     <div className="dark text-minified  padding-20" style={{lineHeight:"1.5rem"}}>
-      <div >
+      <div className='padding-bottom-80' >
         {/* Main Footer Content */}
         <div className="row space-between padding-bottom-40">
           {/* Services Section */}
@@ -25,12 +25,7 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="col sm-12 md-6 lg-3 padding-10">
             <div className="h5 text-bold margin-bottom-20">Contact Info</div>
-            <div className="margin-bottom-15">
-              <RowFlexUi gap={0.5}>
-                <div className="text-bold">Address:</div>
-                <div>16 Taber Rd, Etobicoke, ON M9W 3A5</div>
-              </RowFlexUi>
-            </div>
+          
             <div className="flex align-center margin-bottom-15">
               <PiPhone className="margin-right-10" />
               <RowFlexUi gap={0.5}>
@@ -108,7 +103,13 @@ export default function Footer() {
             <span>© {new Date().getFullYear()} AutoGlass Gurus</span>
           </RowFlexUi>
         </div>
+
+           <div className="width-300-max center">
+        <img src="/payments.png" width={"100%"} alt="" />
       </div>
+      </div>
+
+   
     </div>
   )
 }

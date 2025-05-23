@@ -2,7 +2,7 @@
 import UiButton from '@/ui/button'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { PiCalendar, PiFacebookLogo, PiInstagramLogo, PiList, PiNote, PiPhone, PiTiktokLogo, PiWhatsappLogo, PiX } from 'react-icons/pi'
+import { PiCalendar, PiFacebookLogo, PiHouse, PiInstagramLogo, PiList, PiNote, PiPhone, PiTiktokLogo, PiWhatsappLogo, PiX } from 'react-icons/pi'
 import Image from 'next/image'
 import Logo from '@/ui/Logo'
 import RowFlexUi from '@/ui/RowFlex'
@@ -58,28 +58,6 @@ export default function Nav() {
         </a>
      </div>
     <div className='hide-small'>
-      <RowFlexUi gap={1}>
-        <RowFlexUi gap={0.1} alignItems='flex-end'>
-          <PiPhone size={30} className='text-primary' />
-        <div>
-              <TextUi
-          text="Place a call"
-          size='smaller'
-          bold
-          uppercase
-          color={'primary'}
-          />
-              <TextUi
-          text="+1 647-708-4226"
-          heading='h5'
-          funcss='hide-small'
-          />
-              <TextUi
-          text="+1 647-708-4226"
-          funcss='show-small'
-          />
-        </div>
-        </RowFlexUi>
         <RowFlexUi gap={0.1} alignItems='flex-end'>
           <PiPhone size={30} className='text-primary' />
         <div>
@@ -100,7 +78,6 @@ export default function Nav() {
           />
         </div>
         </RowFlexUi>
-      </RowFlexUi>
     </div>
     <div className='hide-small' >
       <a href="mailto:info@autoglassgurus.ca"  className='text-primary'>info@autoglassgurus.ca</a>
@@ -175,17 +152,7 @@ export default function Nav() {
 
    
           <div className='show-small'>
-      <RowFlexUi gap={1}>
-        <RowFlexUi gap={0.1}>
-          <PiPhone size={20} className='text-white' />
-        <div>
-              <TextUi
-          text="+1 647-708-4226"
-          color={"white"}
-          />
-        </div>
-        </RowFlexUi>
-        <RowFlexUi gap={0.1}>
+    <RowFlexUi gap={0.1}>
             <PiPhone size={20} className='text-white' />
         <div>
               <TextUi
@@ -195,12 +162,22 @@ export default function Nav() {
         </div>
         
         </RowFlexUi>
-      </RowFlexUi>
     </div>
 
   
   </div>
   <div className="bottomNav">
+       <a href={'/'}>
+    <div className='text-bold text-center'>
+    <PiHouse className='text-white' size={30} />
+        <div>
+          <TextUi
+            text="Home"
+            color={"white"}
+          />
+        </div>
+    </div>
+      </a>
       <a href="tel:+1 647-708-4226">
     <div className='text-bold text-center'>
    <PiPhone className='text-white' size={30} />

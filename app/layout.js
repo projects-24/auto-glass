@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Auto Glass Gurus",
-  description: "AutoGlass Gurus",
+  title: "Auto Glass Gurus: Get you windshield repaired",
+  description: "Expert auto glass services across Canada—windshield repair and replacement, side and rear window fixes, 24/7 emergency response, and advanced ADAS calibration. Fast, certified, and precise care for over 3,000 vehicle models. Book your service today!",
 };
 
 export default function RootLayout({ children }) {

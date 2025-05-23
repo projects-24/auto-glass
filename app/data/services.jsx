@@ -39,19 +39,19 @@ export const Services = [
 export const autoGlassData = [
   {
     image: "/incentives/windshield.png",
-    title: "windshield replacement mississauga",
-    subtitle: "Windshield Repair/Replacement Mississauga",
-    description: "Offering quality mobile and on-site auto glass repair and replacement at your home or at our Mississauga location. Auto glass service includes front and rear windshields, tinted glass for cars, mirrors and even sunroof repair - guaranteed for the life of your vehicle."
+    title: "windshield replacement etobicoke",
+    subtitle: "Windshield Repair/Replacement Etobicoke",
+    description: "Offering quality mobile and on-site auto glass repair and replacement at your home or at our Etobicoke location. Auto glass service includes front and rear windshields, tinted glass for cars, mirrors and even sunroof repair - guaranteed for the life of your vehicle."
   },
   {
         image: "/incentives/cost.png",
     title: "windshield replacement cost",
     subtitle: "More Affordable Than the Rest",
-    description: "AutoGlass Gurus has more makes and models of windshields in our auto glass shop in Mississauga than any other auto glass shop. This allows us to offer rapid auto glass service at 10% lower than other auto glass shops in Mississauga & GTA."
+    description: "AutoGlass Gurus has more makes and models of windshields in our auto glass shop in Etobicoke than any other auto glass shop. This allows us to offer rapid auto glass service at 10% lower than other auto glass shops in Etobicoke & GTA."
   },
   {
         image: "/incentives/shield.png",
-    title: "best windshield repair mississauga",
+    title: "best windshield repair etobicoke",
     subtitle: "Cutting Edge Technology",
     description: "Each of our trained auto glass repair experts uses the latest in industry leading auto glass repair technology to assure your complete safety and security. Our team is highly experienced in driver-assistance systems."
   },
@@ -63,12 +63,11 @@ export const autoGlassData = [
   }
 ];
 
-
 export const autoGlassBenefits = [
   {
     title: "Free Mobile Service",
     subtitle: "We come to you—no extra cost.",
-    description: "Get repaired at home, work, or anywhere in Mississauga."
+    description: "Get repaired at home, work, or anywhere in Etobicoke."
   },
   {
     title: "OEM Auto Glass",

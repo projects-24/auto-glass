@@ -81,12 +81,12 @@ useEffect(() => {
                   <div className="article section">
   <div>
     <div>
-      💸 We Pay Up To <strong>100%</strong> Of Your Deductible
+      💸 We Pay Up To <strong>100%</strong> Of Your <span className="text-bold">Deductible</span> 
     </div>
   </div>
   <div>
     <div>
-      🛡️ Lifetime Auto Glass Repair Warranty
+      🛡️ Lifetime Auto Glass Repair <span className="text-bold">Warranty</span>
     </div>
   </div>
   <div>
@@ -381,4 +381,5 @@ useEffect(() => {
    </main>
   );
 }
+
 
