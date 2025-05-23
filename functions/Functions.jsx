@@ -5698,7 +5698,6 @@ return allcars
 
 
 
-
 export const locations = [
   "Toronto",
   "Mississauga",
@@ -5721,5 +5720,11 @@ export const locations = [
   "Halton Hills",
   "Kitchener",
   "Paris, ON",
-  "Copetown"
+  "Copetown",
+  "Markdale",
+  "Owensound",
+  "Collingwood",
+  "Orangeville",
+  "Shelburne"
 ]
+

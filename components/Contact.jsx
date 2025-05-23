@@ -14,7 +14,7 @@ export default function ContactUs() {
               <div className="border padding round-edge">
                 <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Call Us:</h6>
                 <h5>
-                +1 647-708-4226
+                {`+1 (905) 226-4226`}
                 </h5>
               </div>
             </div>

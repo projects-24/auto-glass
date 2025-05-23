@@ -44,7 +44,9 @@ export default function Footer() {
               <PiClock className="margin-right-10" />
               <div className="text-bold">24/7 Emergency Service</div>
             </div>
-<div className="section"></div>
+<div className="section">
+<div className="h5 text-bold margin-bottom-20">Locations</div>
+</div>
                         {
                           locations.map((res) => {
                             return (

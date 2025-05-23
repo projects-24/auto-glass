@@ -177,7 +177,7 @@ const templateParams = {
     <div>
       {
         message && 
-      <Alert fixed="top-middle" card message={message} type={alert_state || "info"}/>
+      <Alert standard fixed="top-middle" card message={message} type={alert_state || "info"}/>
       }
       {
         isLoading && 
