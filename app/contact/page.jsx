@@ -67,7 +67,7 @@ useEffect(() => {
     "Passenger Rear Quarter Glass",
     "Rear Quarter Glass",
     "chip repair",
-    "Other"
+    "other"
   ];
 
   const currentYear = new Date().getFullYear();
@@ -116,7 +116,7 @@ const templateParams = {
 
 🛠️ REPAIR REQUEST
 ========================
-🧩 Requested Part  : ${form.part || form.otherPart || 'Not specified'}
+🔩 Requested Part  : ${form.part === 'other' ? form.otherPart : form.part || 'Not specified'}
 🗒️ Additional Notes: ${form.message || 'None'}
 
 📍 Submitted via the company website.
