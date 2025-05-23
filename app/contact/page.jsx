@@ -93,7 +93,7 @@ const Submit = () => {
   setisLoading(true);
   let testEmail =  "abdulwahabiddris08@gmail.com" 
   const templateParams = {
-  email: testEmail || companyEmail,
+  email: companyEmail,
   name: form.name,
   //  'my_file': attachmentBase64 ,
   message: `

@@ -203,7 +203,7 @@ export default function Nav() {
   <div className="bottomNav">
       <a href="tel:+1 647-708-4226">
     <div className='text-bold text-center'>
-   <PiPhone className='text-white' size={25} />
+   <PiPhone className='text-white' size={30} />
         <div>
           <TextUi
             text="Call Us"
@@ -214,7 +214,7 @@ export default function Nav() {
       </a>
       <a href={socialLinks.whatsapp}>
     <div className='text-bold text-center'>
-    <PiWhatsappLogo className='text-white' size={25} />
+    <PiWhatsappLogo className='text-white' size={30} />
         <div>
           <TextUi
             text="Text Us"
@@ -225,7 +225,7 @@ export default function Nav() {
       </a>
       <a href={'/contact'}>
     <div className='text-bold text-center'>
-    <PiNote className='text-white' size={25} />
+    <PiNote className='text-white' size={30} />
         <div>
           <TextUi
             text="Qoute"
