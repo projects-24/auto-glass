@@ -1,7 +1,7 @@
 'use client'
 import Hero from '@/components/Hero'
 import Nav from '@/components/Nav'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PiPaperPlaneRight , PiKey, PiCheck, PiUser, PiPhone, PiTextAlignCenter, PiTextAlignJustify, PiPaperPlane } from 'react-icons/pi';
 import Input from 'funuicss/ui/input/Input'
 import IconicInput from 'funuicss/ui/input/Iconic'
@@ -29,8 +29,22 @@ export default function Contact() {
     name: '',
     subject: '',
     phone: '',
+    message: '',
+    vin: '',
   });
 const [attachmentBase64, setAttachmentBase64] = useState('');
+
+useEffect(() => {
+      setTimeout(() => {
+        setmessage('');
+        setalert_state(false);
+      }, 5000);
+
+  return () => {
+    clearTimeout()
+  }
+}, [alert_state])
+
 
 // const handleFileChange = (e) => {
 //   const file = e.target.files[0];
@@ -68,23 +82,18 @@ const [attachmentBase64, setAttachmentBase64] = useState('');
 const Submit = () => {
   // Validate required fields
   if (
-    !form.name ||
     !form.email ||
-    !form.phone ||
-    !form.subject ||
-    !form.make ||
-    !form.model ||
-    !form.year ||
-    !form.part
+    !form.phone 
   ) {
-    alert('Please fill all required fields before submitting.');
+    setmessage('Please Enter you email and contact!')
+    setalert_state("warning")
     return;
   }
 
   setisLoading(true);
   let testEmail =  "abdulwahabiddris08@gmail.com" 
   const templateParams = {
-  email: companyEmail,
+  email: testEmail || companyEmail,
   name: form.name,
   //  'my_file': attachmentBase64 ,
   message: `
@@ -102,11 +111,12 @@ const Submit = () => {
 🏷️ Make       : ${form.make}
 🚘 Model      : ${form.model}
 📅 Year       : ${form.year}
+📅 Vin Number : ${form.vin}
 
 🛠️ REPAIR REQUEST
 ========================
 🧩 Requested Part : ${form.part}
-🗒️ Additional Notes: ${form.otherPart || 'None'}
+🗒️ Additional Notes: ${form.message || 'None'}
 
 📍 Submitted via the company website.
     `,
@@ -137,16 +147,15 @@ const Submit = () => {
         name: '',
         subject: '',
         phone: '',
+        vin:'',
+        message:""
       });
 
       // Stop loading
       setisLoading(false);
 
       // Hide message after 5 seconds
-      setTimeout(() => {
-        setmessage('');
-        setalert_state(false);
-      }, 5000);
+
     })
     .catch((err) => {
       console.error('Email sending failed:', err);
@@ -228,6 +237,15 @@ const Submit = () => {
             onChange={handleChange('year')}
             value={form.year}
           />
+
+                  <div className="section"></div>
+          <Input
+            fullWidth
+            bordered
+            label="VIN Number (Optional)"
+            onChange={handleChange('vin')}
+            value={form.vin}
+          />
   
           {/* Personal Information */}
           <RowFlexUi responsiveSmall gap={1} funcss="section">
@@ -259,11 +277,20 @@ const Submit = () => {
               <IconicInput
                 funcss=" full-width"
                 leftIcon={<PiPhone className="text-primary" />}
-                input={<Input type="text" label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} />}
+                input={<Input  type="text" label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} />}
               />
             </div>
           </RowFlexUi>
-
+          <div className="section"></div>
+          <Input
+            fullWidth
+            bordered
+            label="Message"
+            onChange={handleChange('message')}
+            value={form.message}
+            multiline
+            rows={5}
+          />
           <div className="section text-center">
             <UiButton
             fullWidth
