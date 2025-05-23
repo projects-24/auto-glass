@@ -3,7 +3,7 @@ import Hero from '@/components/Hero'
 import Nav from '@/components/Nav'
 import React, { useEffect, useState } from 'react'
 import { PiPaperPlaneRight , PiKey, PiCheck, PiUser, PiPhone, PiTextAlignCenter, PiTextAlignJustify, PiPaperPlane } from 'react-icons/pi';
-import Input from 'funuicss/ui/input/Input'
+import Input from '@/ui/input'
 import IconicInput from 'funuicss/ui/input/Iconic'
 import RowFlexUi from '@/ui/RowFlex';
 import UiButton from '@/ui/button';
@@ -28,7 +28,7 @@ export default function Contact() {
     registration: '',
     email: '',
     name: '',
-    subject: '',
+    city: '',
     phone: '',
     message: '',
     vin: '',
@@ -83,44 +83,44 @@ useEffect(() => {
 const Submit = () => {
   // Validate required fields
   if (
+    !form.name ||
     !form.email ||
     !form.phone 
   ) {
-    setmessage('Please Enter you email and contact!')
+    setmessage('Please Enter your Name, Email & Contact!')
     setalert_state("warning")
     return;
   }
 
   setisLoading(true);
   let testEmail =  "abdulwahabiddris08@gmail.com" 
-  const templateParams = {
-  email: companyEmail,
+const templateParams = {
+  email:  companyEmail,
   name: form.name,
-  //  'my_file': attachmentBase64 ,
   message: `
 🔧 NEW WINDSHIELD REPAIR QUOTE REQUEST 🔧
 
 📌 CLIENT INFORMATION
 ========================
-👤 Name       : ${form.name}
-📧 Email      : ${form.email}
-📞 Phone      : ${form.phone}
-📝 Subject    : ${form.subject}
+👤 Name         : ${form.name || 'Not provided'}
+📧 Email        : ${form.email || 'Not provided'}
+📞 Phone        : ${form.phone || 'Not provided'}
+🏙️ City         : ${form.city || 'Not provided'}
 
 🚗 VEHICLE DETAILS
 ========================
-🏷️ Make       : ${form.make}
-🚘 Model      : ${form.model}
-📅 Year       : ${form.year}
-📅 Vin Number : ${form.vin}
+🏷️ Make         : ${form.make || 'Not provided'}
+🚘 Model        : ${form.model || 'Not provided'}
+📅 Year         : ${form.year || 'Not provided'}
+🔢 VIN Number   : ${form.vin || 'Not provided'}
 
 🛠️ REPAIR REQUEST
 ========================
-🧩 Requested Part : ${form.part}
+🧩 Requested Part  : ${form.part || form.otherPart || 'Not specified'}
 🗒️ Additional Notes: ${form.message || 'None'}
 
 📍 Submitted via the company website.
-    `,
+  `,
 };
 
 
@@ -146,7 +146,7 @@ const Submit = () => {
         year: '',
         email: '',
         name: '',
-        subject: '',
+        city: '',
         phone: '',
         vin:'',
         message:""
@@ -189,7 +189,7 @@ const Submit = () => {
         hero={"Get a free qoute online"}
         body={`     Let us help you with your auto glass needs. Contact us today to schedule your repair or replacement!`}
         />
-  <div style={{ minHeight: "100vh" }} className="flex padding-20 dark900 text-dark round-edge">
+  <div style={{ minHeight: "100vh" }} className="flex dark900 text-dark round-edge">
         <div className="width-600-max center">
                <RowFlexUi gap={1} justify='center'>
             <img className="width-90" src="/reviewed.png" alt="" />
@@ -218,15 +218,16 @@ const Submit = () => {
               label="Specify the problem"
               value={form.otherPart}
               onChange={handleChange('otherPart')}
+              hint="e.g. side window, rear window, or any other part not listed"
             />
           )}
 
           {/* Car details */}
-          <Input fullWidth bordered label="Car Make" onChange={handleChange('make')} value={form.make} />
+          <Input fullWidth bordered label="Car Make" onChange={handleChange('make')} value={form.make} hint="e.g. Toyota, Ford, Honda" />
                     <div className="section"></div>
-          <Input fullWidth bordered label="Model" onChange={handleChange('model')} value={form.model} />
+          <Input fullWidth bordered label="Model" onChange={handleChange('model')} value={form.model} hint="e.g. Camry, Mustang, Civic" />
                   {/* <div className="section"></div>
-          <Input fullWidth bordered label="Attachment" type="file" accept="image/*" onChange={handleFileChange} /> */}
+          <Input fullWidth bordered label="Attachment" type="file" accept="image/*" onChange={handleFileChange} hint="Attach a photo of the damaged part" /> */}
 
                   <div className="section"></div>
           <Input
@@ -237,6 +238,7 @@ const Submit = () => {
             options={[{ text: "Select year", value: "" }, ...years]}
             onChange={handleChange('year')}
             value={form.year}
+            hint="Year of the car"
           />
 
                   <div className="section"></div>
@@ -246,40 +248,25 @@ const Submit = () => {
             label="VIN Number (Recommended)"
             onChange={handleChange('vin')}
             value={form.vin}
+            hint="The Vehicle Identification Number "
           />
   
           {/* Personal Information */}
           <RowFlexUi responsiveSmall gap={1} funcss="section">
             <div className="col">
-              <IconicInput
-                funcss=" full-width"
-                leftIcon={<PiPaperPlaneRight className="text-primary" />}
-                input={<Input type="email" label="Email" funcss="full-width" bordered value={form.email} onChange={handleChange('email')} />}
-              />
+               <Input required type="email" label="Email" funcss="full-width" bordered value={form.email} onChange={handleChange('email')} hint="We'll send you a quote and follow up with you" />
             </div>
             <div className="col">
-              <IconicInput
-                funcss=" full-width"
-                leftIcon={<PiUser className="text-primary" />}
-                input={<Input type="text" label="Full Name" funcss="full-width" bordered value={form.name} onChange={handleChange('name')} />}
-              />
+             <Input required type="text" label="Name" funcss="full-width" bordered value={form.name} onChange={handleChange('name')} hint="Your full name please" />
             </div>
           </RowFlexUi>
 
           <RowFlexUi responsiveSmall gap={1} funcss="section">
             <div className="col">
-              <IconicInput
-                funcss=" full-width"
-                leftIcon={<PiTextAlignCenter className="text-primary" />}
-                input={<Input type="text" label="Subject" funcss="full-width" bordered value={form.subject} onChange={handleChange('subject')} />}
-              />
+             <Input type="text" required label="city" funcss="full-width" bordered value={form.city} onChange={handleChange('city')} hint="City or town of residence" />
             </div>
             <div className="col">
-              <IconicInput
-                funcss=" full-width"
-                leftIcon={<PiPhone className="text-primary" />}
-                input={<Input  type="text" label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} />}
-              />
+          <Input  type="text" required label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} hint="Your phone number, please" />
             </div>
           </RowFlexUi>
           <div className="section"></div>
@@ -291,6 +278,7 @@ const Submit = () => {
             value={form.message}
             multiline
             rows={5}
+            hint="Any additional information you'd like to provide"
           />
           <div className="section text-center">
             <UiButton

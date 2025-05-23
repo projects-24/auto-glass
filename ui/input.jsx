@@ -11,9 +11,10 @@ export default function cls
     block 
     size='small' 
     uppercase 
-    color='dark800'
+    color='dark200'
     funcss='margin-bottom-10'
+    bold
     />
-    <Input label={hint || ''} funcss={`dark _input roundEdgeSmall ${funcss}`} borderless {...rest} fullWidth />
+    <Input label={hint || ''} funcss={` ${funcss}`} bordered {...rest} fullWidth />
 </div>
 }
