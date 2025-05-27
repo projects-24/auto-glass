@@ -263,7 +263,7 @@ const templateParams = {
 
           <RowFlexUi responsiveSmall gap={1} funcss="section">
             <div className="col">
-             <Input type="text" required label="city" funcss="full-width" bordered value={form.city} onChange={handleChange('city')} hint="City or town of residence" />
+             <Input type="text" required label="city" funcss="full-width" bordered value={form.city} onChange={handleChange('city')} hint="City or Town" />
             </div>
             <div className="col">
           <Input  type="text" required label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} hint="Your phone number, please" />
