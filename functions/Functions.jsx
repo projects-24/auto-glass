@@ -5,7 +5,8 @@ export const socialLinks = {
    tiktok:'https://www.tiktok.com/@autoglassgurus'
 }
 
-export let companyEmail = "info@autoglassgurus.ca"
+export let companyEmail = "Obedlyrics3@gmail.com"
+// export let companyEmail = "info@autoglassgurus.ca"
 
 const allcars = [
    {
