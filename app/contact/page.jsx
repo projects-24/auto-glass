@@ -95,7 +95,7 @@ const Submit = () => {
   setisLoading(true);
   let testEmail =  "abdulwahabiddris08@gmail.com" 
 const templateParams = {
-  email:  companyEmail,
+  email: companyEmail,
   name: form.name,
   message: `
 🔧 NEW WINDSHIELD REPAIR QUOTE REQUEST 🔧
