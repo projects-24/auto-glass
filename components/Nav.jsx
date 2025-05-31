@@ -58,6 +58,7 @@ export default function Nav() {
         </a>
      </div>
     <div className='hide-small'>
+       <a  href="tel:+1 647-708-4226">
         <RowFlexUi gap={0.1} alignItems='flex-end'>
           <PiPhone size={30} className='text-primary' />
         <div>
@@ -78,6 +79,7 @@ export default function Nav() {
           />
         </div>
         </RowFlexUi>
+        </a>
     </div>
     <div className='hide-small' >
       <a href="mailto:info@autoglassgurus.ca"  className='text-primary'>info@autoglassgurus.ca</a>
@@ -152,6 +154,7 @@ export default function Nav() {
 
    
           <div className='show-small'>
+            <a  href="tel:+1 647-708-4226">
     <RowFlexUi gap={0.1}>
             <PiPhone size={20} className='text-white' />
         <div>
@@ -162,6 +165,7 @@ export default function Nav() {
         </div>
         
         </RowFlexUi>
+        </a>
     </div>
 
   
