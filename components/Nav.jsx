@@ -58,7 +58,7 @@ export default function Nav() {
         </a>
      </div>
     <div className='hide-small'>
-       <a  href="tel:+1 647-708-4226">
+       <a  href="tel:+1 905-226-4226">
         <RowFlexUi gap={0.1} alignItems='flex-end'>
           <PiPhone size={30} className='text-primary' />
         <div>
@@ -154,7 +154,7 @@ export default function Nav() {
 
    
           <div className='show-small'>
-            <a  href="tel:+1 647-708-4226">
+            <a  href="tel:+1 905-226-4226">
     <RowFlexUi gap={0.1}>
             <PiPhone size={20} className='text-white' />
         <div>
@@ -182,7 +182,7 @@ export default function Nav() {
         </div>
     </div>
       </a>
-      <a href="tel:+1 647-708-4226">
+      <a href="tel:+1 905-226-4226">
     <div className='text-bold text-center'>
    <PiPhone className='text-white' size={30} />
         <div>

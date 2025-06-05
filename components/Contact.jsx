@@ -15,7 +15,7 @@ export default function ContactUs() {
             <div className="border padding round-edge">
               <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Call Us:</h6>
               <h5>
-                <a href="tel:+19052264226">+1 (905) 226-4226</a>
+                <a href="tel:+1 905-226-4226">+1 (905) 226-4226</a>
               </h5>
             </div>
           </div>
