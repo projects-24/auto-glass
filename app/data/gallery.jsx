@@ -18,6 +18,6 @@ export const galleryImages = [
     '/gallery/17.jpeg',
     '/gallery/18.jpeg',
     '/gallery/19.jpeg',
-    '/gallery/20.jpeg',
+    '/gallery/20.jpg',
 ];
 
