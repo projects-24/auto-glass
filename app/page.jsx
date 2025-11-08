@@ -119,12 +119,12 @@ useEffect(() => {
              <div>
                <TextUi text='call us now!' color='white'/>
              </div>
-           <Link href={"tel:+19052264226"}>
+           <Link href={"tel:+437-436-7669"}>
         <UiButton 
         startIcon={<PiPhone />}
         color='white'
         big
-      text={  <TextUi text='+19052264226' color='white' heading='h2' light/> }  />
+      text={  <TextUi text='+437-436-7669' color='white' heading='h2' light/> }  />
         </Link>
             </div>
           
@@ -295,7 +295,7 @@ useEffect(() => {
     </div>
     <div className="width-700-max center">
       <div className="section4 padding" data-aos="fade-up">
-        <img src="/images/services/windshield_replacement.jpg" className="fit" alt="AutoGlass Repair" />
+        <img src="/gallery/1.webp" className="fit" alt="AutoGlass Repair" />
       </div>
       <div className="padding">
         <p className="article" data-aos="fade-up">
