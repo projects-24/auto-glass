@@ -2,7 +2,7 @@ export const Services = [
   {
     name: "Windshield Repair",
     subtitle: "Stop small damage from becoming big problems",
-    description: "Our advanced resin injection technology can repair chips and cracks up to 12 inches long, preventing the need for costly replacements in 90% of cases. Using UV-cured polymers that bond at the molecular level, we restore your windshield's original strength while maintaining perfect optical clarity. Most repairs take under 30 minutes and can prevent dangerous spreading that compromises your safety.",
+    description: "Our advanced resin injection technology can repair chips preventing the need for costly replacements in 90% of cases. Using UV-cured polymers that bond at the molecular level, we restore your windshield's original strength while maintaining perfect optical clarity. Most repairs take under 30 minutes and can prevent dangerous spreading that compromises your safety.",
     image: "/images/4.jpg"
   },
   {
