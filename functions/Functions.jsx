@@ -5699,8 +5699,12 @@ return allcars
 
 
 
+export const toSlug = (name) =>
+  name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+
 export const locations = [
   "Toronto",
+  "Barrie",
   "Mississauga",
   "Streetsville",
   "Port Credit",

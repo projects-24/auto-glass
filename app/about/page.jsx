@@ -1,15 +1,9 @@
-'use client'
 import ContactUs from '@/components/Contact'
 import Hero from '@/components/Hero'
 import Nav from '@/components/Nav'
-import Aos from 'aos'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export default function About() {
-       useEffect(() => {
-      Aos.init()  
-      }, [])
-    
   return (
  
     <div className='padding-top-80'>
@@ -51,7 +45,7 @@ body={`  We are committed to providing top-quality auto glass repair and replace
     
                <div className="header margin-top-100" >
           <h2 className="title">
-    {`Don’t Hesited To Contact Us`}
+    {`Don’t Hesitate To Contact Us`}
           </h2>
           <div className="section"></div>
           <div className="article">

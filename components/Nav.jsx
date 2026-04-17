@@ -21,22 +21,11 @@ export default function Nav() {
   // }, [showNav]);
 
  useEffect(() => {
-    // Resize handler
-    const handleResize = () => {
-      setHeight(window.innerWidth);
-    };
-
-    // Call it once when the component mounts
+    const handleResize = () => setHeight(window.innerWidth);
     handleResize();
-
-    // Add event listener
     window.addEventListener('resize', handleResize);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div> 
@@ -53,9 +42,9 @@ export default function Nav() {
       <div class="navtop white">
           {/* Logo with Image */}
      <div >
-      <a href="/#home">
+      <Link href="/#home">
           <Logo />
-        </a>
+        </Link>
      </div>
     <div className='hide-small'>
        <a  href="tel:+1 437-436-7669">
@@ -88,7 +77,7 @@ export default function Nav() {
       <div className='show-small'>
         {/* <Link href={"/contact"}>
         <UiButton 
-      text={"Get a Quick Qoute"}
+      text={"Get a Quick Quote"}
       bg='primary'
         fillAnimation 
    outlined 
@@ -124,7 +113,7 @@ export default function Nav() {
        <div>
         <Link href={"/contact"}>
         <UiButton 
-      text={"Get a Quick Qoute"}
+      text={"Get a Quick Quote"}
       bg='white'
         fillAnimation 
    outlined 
@@ -209,7 +198,7 @@ export default function Nav() {
     <PiNote className='text-white' size={30} />
         <div>
           <TextUi
-            text="Qoute"
+            text="Quote"
             color={"white"}
           />
         </div>

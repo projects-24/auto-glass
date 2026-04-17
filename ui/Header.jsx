@@ -1,17 +1,15 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Text from 'funuicss/ui/text/Text'
 import SectionUI from './section'
 import BreadCrumb from 'funuicss/ui/breadcrumb/BreadCrumb'
 import RowFlexUi from './RowFlex'
 import Link from 'next/link'
 import TextUi from './Text'
+import { usePathname } from 'next/navigation'
 export default function Header({title, subtitle, uri}) {
-    const [pathname, setpathname] = useState('')
-    useEffect(() => {
-        let res = window.location.pathname
-        setpathname(res.slice(1, res.length).split('/'))
-    }, [])
+    const raw = usePathname()
+    const pathname = raw ? raw.slice(1).split('/') : []
     
   return (
   <div>

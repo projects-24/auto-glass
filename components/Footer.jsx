@@ -1,7 +1,8 @@
-import { locations, socialLinks } from '@/functions/Functions'
+import { locations, socialLinks, toSlug } from '@/functions/Functions'
+import Link from 'next/link'
 import RowFlexUi from '@/ui/RowFlex'
 import React from 'react'
-import { PiFacebookLogo, PiInstagramLogo, PiMapPin, PiPhone, PiEnvelope, PiClock, PiWhatsappLogo, PiTiktokLogo } from 'react-icons/pi'
+import { PiFacebookLogo, PiMapPin, PiPhone, PiEnvelope, PiClock, PiWhatsappLogo, PiTiktokLogo } from 'react-icons/pi'
 
 export default function Footer() {
   return (
@@ -48,16 +49,12 @@ export default function Footer() {
 <div className="h5 text-bold margin-bottom-20">Locations</div>
 </div>
                         {
-                          locations.map((res) => {
-                            return (
-                              <div key={res} className="flex align-center article margin-bottom-15">
-                                <PiMapPin className="margin-right-10" />
-                                <div>
-                                  <div className="text-bold">{res}</div>
-                                </div>
-                              </div>
-                            )
-                          })
+                          locations.map((res) => (
+                            <Link key={res} href={`/locations/${toSlug(res)}`} className="flex align-center article margin-bottom-15 hover-up" style={{ textDecoration: 'none', color: 'inherit' }}>
+                              <PiMapPin className="margin-right-10" />
+                              <div className="text-bold">{res}</div>
+                            </Link>
+                          ))
                         }
           </div>
 

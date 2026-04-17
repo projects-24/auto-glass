@@ -326,6 +326,24 @@ overflow-x: none !important;
   /* Add more if needed */
 }
 
+.quote-btn {
+  background-color: white !important;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  padding: 0.75rem 1.8rem !important;
+  letter-spacing: 0.05rem;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease !important;
+  cursor: pointer !important;
+}
+.quote-btn:hover {
+  background-color: var(--primary) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(5, 61, 112, 0.3) !important;
+}
+
 .whatsappBtn {
   position: fixed;
   bottom: 20px;

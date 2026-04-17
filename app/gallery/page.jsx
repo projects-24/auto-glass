@@ -4,6 +4,15 @@ import React from 'react'
 import { galleryImages } from '../data/gallery'
 import Footer from '@/components/Footer'
 
+export const metadata = {
+  title: "Gallery",
+  description: "Browse our gallery of completed auto glass repair and replacement projects in Ontario. Quality workmanship on windshields, side windows, and rear glass.",
+  openGraph: {
+    title: "Project Gallery — AutoGlass Gurus",
+    description: "See our completed auto glass repair and replacement projects across Ontario.",
+  },
+}
+
 export default function page() {
   return (
     <div>

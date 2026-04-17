@@ -1,36 +1,33 @@
 'use client'
 import { useEffect, useState } from "react";
-import { _TEAM } from "./data/team";
-import Aos from 'aos'
-import Animation from "funuicss/ui/aos/AOS" 
-import Div from 'funuicss/ui/div/Div'
-import Text from 'funuicss/ui/text/Text'
-import Grid from 'funuicss/ui/grid/Grid'
-import Col from 'funuicss/ui/grid/Col'
-import Container from 'funuicss/ui/container/Container'
-import Section from 'funuicss/ui/specials/Section'
-import Button from 'funuicss/ui/button/Button'
-import Input from 'funuicss/ui/input/Input'
-import RowFlex from 'funuicss/ui/specials/RowFlex'
-import List from 'funuicss/ui/list/List'
-import ListItem from 'funuicss/ui/list/Item'
-import {FunGet} from 'funuicss/js/Fun'
+import Animation from "funuicss/ui/aos/AOS"
 import Alert from 'funuicss/ui/alert/Alert'
 import Nav from "@/components/Nav";
-import {PiChecks, PiDiamondsFour, PiGear, PiGoogleLogo, PiPhone, PiPlusCircle, PiSketchLogo, PiStar, PiStarDuotone, PiStarFill, PiUserCheck} from 'react-icons/pi'
+import HomeHero from "@/components/HomeHero";
+import { PiPlusCircle, PiStarDuotone, PiStarFill } from 'react-icons/pi'
 import Footer from "@/components/Footer";
 import TextUi from "@/ui/Text";
-import SectionUI from "@/ui/section";
 import { autoGlassBenefits, autoGlassData, Services } from "./data/services";
 import { reviews } from "./data/reviews";
 import RowFlexUi from "@/ui/RowFlex";
-import { FaPlusSquare } from 'react-icons/fa';
 import UiButton from "@/ui/button";
-import Logo from "@/ui/Logo";
 import Link from "next/link";
-import CircleUi from "@/ui/Circle";
 import { companies } from "./data/Companies";
 
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "AutoGlass Gurus",
+  "description": "Professional auto glass repair and replacement in Toronto & Ontario.",
+  "url": "https://www.autoglassgurus.ca",
+  "telephone": "+14374367669",
+  "email": "info@autoglassgurus.ca",
+  "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+  "areaServed": "Ontario, Canada",
+  "openingHours": "Mo-Su 00:00-24:00",
+  "priceRange": "$$",
+}
 
 export default function Home() {
   const [success, setsuccess] = useState(false)
@@ -50,12 +47,9 @@ export default function Home() {
   
 
 
-useEffect(() => {
-  Aos.init()  
-  }, [])
-
    return (
    <main>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     {
     success && <Alert fixed='top-right' message="Your message has been submitted successfully." standard type="success" card />
     }
@@ -65,74 +59,7 @@ useEffect(() => {
   <Nav />
   <div id="home"></div>
 
-  <div className="home">
-  <div className="homeTab text-white text-center center">
-         <div >
-       
-         <TextUi
-              text="Get you windshield repaired"
-              block
-              lineHeight="100%"
-              size="jumbo"
-              color={"white"}
-            />
-
-            {/* Highlighted Key Benefits */}
-                  <div className="article section">
-  <div>
-    <div>
-      💸 We Pay Up To <strong>100%</strong> Of Your <span className="text-bold">Deductible</span> 
-    </div>
-  </div>
-  <div>
-    <div>
-      🛡️ Lifetime Auto Glass Repair <span className="text-bold">Warranty</span>
-    </div>
-  </div>
-  <div>
-    <div>
-      🔧 We Will Beat Any Competitor <span className="text-bold">By 10%!</span>
-    </div>
-  </div>
-  <div>
-    <div>
-      🇨🇦 Canadian Owned & Operated
-    </div>
-  </div>
-</div>
-
-
-            <div style={{ marginTop: "30px" }}>
-           <Link href={"/contact"}>
-        <UiButton 
-      text={"GET A FREE QOUTE ONLINE"}
-      bg='white'
-        fillAnimation 
-   outlined 
-   outlineSize={0.1}
-   big
-   fillTextColor='primary' 
-      />
-        </Link>
-            </div>
-            <div className="text-center " style={{ marginTop: "30px" }}>
-             <div>
-               <TextUi text='call us now!' color='white'/>
-             </div>
-           <Link href={"tel:+437-436-7669"}>
-        <UiButton 
-        startIcon={<PiPhone />}
-        color='white'
-        big
-      text={  <TextUi text='+437-436-7669' color='white' heading='h2' light/> }  />
-        </Link>
-            </div>
-          
-    
-
-         </div>
-          </div>
-</div>
+  <HomeHero />
 
 <div id=""></div>
 <div className="wrapper central" data-aos="fade-up">
@@ -225,7 +152,6 @@ useEffect(() => {
       </div>
     </div>
 
-
  
 </div>
 </div>
@@ -262,14 +188,7 @@ useEffect(() => {
 
             <div className="section">
                      <Link href={"/contact"}>
-        <UiButton 
-      text={"Get a Quick Qoute"}
-      bg='primary'
-        fillAnimation 
-   outlined 
-   outlineSize={0.1}
-   fillTextColor='dark900' 
-      />
+        <UiButton text="Get a Quick Quote" qoute />
         </Link>
             </div>
           </div>
@@ -339,32 +258,28 @@ useEffect(() => {
         <div className="row">
           {
             reviews.map((doc, i) => (
-              <div class="col sm-12 md-6 lg-6 padding" data-aos="fade-up" key={i}>
+              <div className="col sm-12 md-6 lg-6 padding" data-aos="fade-up" key={i}>
                <RowFlexUi gap={1} justify='space-between'>
-                  <div className="">
-                  <img src={doc.profile} className="width-50 circle" alt="" />
-                     <div class="article section">{doc.user}</div>
+                  <div>
+                  <img src={doc.profile} className="width-50 circle" alt={doc.user} />
+                     <div className="article section">{doc.user}</div>
                 </div>
              <img src="/google.png" className="width-20" alt="" />
                </RowFlexUi>
-                <p>
+                <div>
                   <RowFlexUi gap={2} justify='space-between'>
-                    <div class="row-flex">
-                      <div class="h4 text-yellow"> <PiStarFill /></div>
-                      <div class="h4 text-yellow"> <PiStarFill /></div>
-                      <div class="h4 text-yellow"> <PiStarFill /></div>
-                      {
-                        doc.stars == "4" || doc.stars == '5' ? <div class="h4 text-yellow"> <PiStarFill /></div> : ''
-                      }
-                      {
-                        doc.stars == "5" ? <div class="h4 text-yellow"> <PiStarFill /></div> : <div class="h4 text-dark"> <PiStarDuotone /></div>
-                      }
+                    <div className="row-flex">
+                      <div className="h4 text-yellow"><PiStarFill /></div>
+                      <div className="h4 text-yellow"><PiStarFill /></div>
+                      <div className="h4 text-yellow"><PiStarFill /></div>
+                      {(doc.stars == "4" || doc.stars == '5') && <div className="h4 text-yellow"><PiStarFill /></div>}
+                      {doc.stars == "5" ? <div className="h4 text-yellow"><PiStarFill /></div> : <div className="h4 text-dark"><PiStarDuotone /></div>}
                     </div>
                   </RowFlexUi>
                   <div className="article text-dark200 text-italic">
-                    {`"`} {doc.review} {`"`}
+                    &ldquo;{doc.review}&rdquo;
                   </div>
-                </p>
+                </div>
               </div>
             ))
           }

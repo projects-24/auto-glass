@@ -186,7 +186,7 @@ const templateParams = {
         <Nav />
 
         <Hero
-        hero={"Get a free qoute online"}
+        hero={"Get a Free Quote Online"}
         body={`     Let us help you with your auto glass needs. Contact us today to schedule your repair or replacement!`}
         />
   <div style={{ minHeight: "100vh" }} className="flex dark900 text-dark round-edge">
@@ -196,7 +196,7 @@ const templateParams = {
             <img className="width-90" src="/guaranteed.png" alt="" />
           </RowFlexUi>
           <div className="text-center section margin-bottom-50">
-            <TextUi text="Request A Quote" size="bigger" />
+            <TextUi text="Request a Quote" size="bigger" />
             <p className="article">Fill in your details below to get started</p>
           </div>
 
@@ -211,7 +211,7 @@ const templateParams = {
             ))}
           </select>
 
-          {form.part === "Other" && (
+          {form.part === "other" && (
             <Input
               fullWidth
               bordered
@@ -282,14 +282,10 @@ const templateParams = {
           />
           <div className="section text-center">
             <UiButton
-            fullWidth
+              fullWidth
               text="SUBMIT YOUR REQUEST"
               endIcon={<PiPaperPlane />}
-              bg="primary"
-              fillAnimation
-              outlined
-              outlineSize={0.1}
-              fillTextColor="dark900"
+              qoute
               onClick={Submit}
             />
           </div>
@@ -305,7 +301,7 @@ const templateParams = {
 
                <div className="header margin-top-100" >
           <h2 className="title">
-    {`Don’t Hesited To Contact Us`}
+    {`Don’t Hesitate To Contact Us`}
           </h2>
           <div className="section"></div>
           <div className="article">
