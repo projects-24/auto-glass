@@ -123,7 +123,7 @@ export default function LocationPage({ params }) {
           <h2 className="title">- Contact Us in {location}</h2>
           <div className="section" />
           <div className="article">
-            Ready to book your auto glass repair in {location}? Reach out today and we'll get you sorted fast.
+            Ready to book your auto glass repair in {location}? Reach out today and we&apos;ll get you sorted fast.
           </div>
         </div>
         <ContactUs />
