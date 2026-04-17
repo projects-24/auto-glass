@@ -8,7 +8,7 @@ export default function ContactUs() {
           <div className="col sm-12 md-6 lg-6 padding">
             <div className="padding border round-edge">
               <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Location:</h6>
-              Toronto, Canada
+              Etobicoke, Canada
             </div>
           </div>
           <div className="col sm-12 md-6 lg-6 padding">

@@ -5703,7 +5703,7 @@ export const toSlug = (name) =>
   name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
 export const locations = [
-  "Toronto",
+  "Etobicoke",
   "Barrie",
   "Mississauga",
   "Port Credit",

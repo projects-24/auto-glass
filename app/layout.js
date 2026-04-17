@@ -13,7 +13,7 @@ export const metadata = {
     default: "AutoGlass Gurus — Windshield Repair & Replacement in Ontario",
     template: "%s | AutoGlass Gurus",
   },
-  description: "AutoGlass Gurus offers expert windshield repair and replacement across Ontario — Toronto, Mississauga, Barrie, Oakville, Hamilton, Guelph, Kitchener & more. 24/7 emergency service, we pay up to 100% of your deductible, lifetime warranty. Book your free quote today!",
+  description: "AutoGlass Gurus offers expert windshield repair and replacement across Ontario — Etobicoke, Mississauga, Barrie, Oakville, Hamilton, Guelph, Kitchener & more. 24/7 emergency service, we pay up to 100% of your deductible, lifetime warranty. Book your free quote today!",
   keywords: [
     // Services
     "auto glass repair", "auto glass replacement", "windshield repair", "windshield replacement",
@@ -25,7 +25,7 @@ export const metadata = {
     "affordable windshield repair", "free windshield replacement insurance",
     "windshield deductible waiver ontario", "OEM windshield replacement",
     // Locations
-    "auto glass toronto", "windshield repair toronto", "auto glass mississauga",
+    "auto glass etobicoke", "windshield repair etobicoke", "auto glass mississauga",
     "windshield repair mississauga", "auto glass barrie", "windshield repair barrie",
     "auto glass oakville", "auto glass hamilton", "auto glass guelph",
     "auto glass kitchener", "auto glass burlington", "auto glass brampton",
@@ -40,7 +40,7 @@ export const metadata = {
     locale: "en_CA",
     url: BASE_URL,
     title: "AutoGlass Gurus — Windshield Repair & Replacement in Ontario",
-    description: "24/7 auto glass repair across Ontario. We pay your deductible, lifetime warranty, mobile service. Serving Toronto, Barrie, Mississauga, Oakville, Hamilton & 25+ cities.",
+    description: "24/7 auto glass repair across Ontario. We pay your deductible, lifetime warranty, mobile service. Serving Etobicoke, Barrie, Mississauga, Oakville, Hamilton & 25+ cities.",
     images: [{ url: "/banner.jpg", width: 1200, height: 630, alt: "AutoGlass Gurus — Ontario's Auto Glass Experts" }],
   },
   twitter: {
