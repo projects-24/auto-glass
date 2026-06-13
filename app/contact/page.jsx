@@ -9,6 +9,7 @@ import RowFlexUi from '@/ui/RowFlex';
 import UiButton from '@/ui/button';
 import TextUi from '@/ui/Text';
 import { cars, companyEmail } from '@/functions/Functions';
+import { trackLead } from '@/functions/analytics';
 import emailjs from '@emailjs/browser';
 import Loader from '@/ui/Loader';
 import Alert from 'funuicss/ui/alert/Alert'
@@ -132,6 +133,9 @@ const templateParams = {
       'Cs-Lc0t9aVCayuZ_Q'       // Your EmailJS public key
     )
     .then((res) => {
+
+      // Track the lead conversion (Google Ads)
+      trackLead({ method: 'quote_form', city: form.city || undefined });
 
       // Show success message
       setmessage('Quote request submitted successfully!, We will contact you soon.');

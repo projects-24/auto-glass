@@ -4,7 +4,7 @@ import HomeHero from '@/components/HomeHero'
 import ContactUs from '@/components/Contact'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { locations, toSlug } from '@/functions/Functions'
+import { locations, toSlug, phoneNumbers, companyEmail, socialLinks } from '@/functions/Functions'
 import { autoGlassData, autoGlassBenefits, Services } from '@/app/data/services'
 import { PiPlusCircle } from 'react-icons/pi'
 import UiButton from '@/ui/button'
@@ -19,6 +19,7 @@ export function generateMetadata({ params }) {
   return {
     title: `Auto Glass Repair in ${location}`,
     description: `Professional windshield repair and replacement in ${location}, Ontario. Mobile service, lifetime warranty, and we pay up to 100% of your deductible. Book your free quote today!`,
+    alternates: { canonical: `/locations/${params.slug}` },
     openGraph: {
       title: `Auto Glass Repair & Replacement in ${location} | AutoGlass Gurus`,
       description: `Serving ${location} with fast, certified auto glass repair. Same-day mobile service available.`,
@@ -30,8 +31,29 @@ export default function LocationPage({ params }) {
   const location = locations.find((loc) => toSlug(loc) === params.slug)
   if (!location) notFound()
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": `AutoGlass Gurus — ${location}`,
+    "description": `Professional windshield repair and replacement serving ${location}, Ontario. Mobile service, lifetime warranty, and we pay up to 100% of your deductible.`,
+    "url": `https://www.autoglassgurus.ca/locations/${params.slug}`,
+    "telephone": phoneNumbers.map((p) => p.tel),
+    "email": companyEmail,
+    "areaServed": { "@type": "City", "name": location },
+    "address": { "@type": "PostalAddress", "addressRegion": "ON", "addressCountry": "CA" },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "00:00",
+      "closes": "23:59",
+    },
+    "sameAs": Object.values(socialLinks),
+    "priceRange": "$$",
+  }
+
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Nav />
       <HomeHero title={`Auto Glass Repair in ${location}`} />
 
@@ -126,7 +148,7 @@ export default function LocationPage({ params }) {
             Ready to book your auto glass repair in {location}? Reach out today and we&apos;ll get you sorted fast.
           </div>
         </div>
-        <ContactUs />
+        <ContactUs location={location} />
       </div>
 
       <Footer />

@@ -8,6 +8,14 @@ export const socialLinks = {
 // export let companyEmail = "Obedlyrics3@gmail.com"
 export let companyEmail = "info@autoglassgurus.ca"
 
+// Single source of truth for the business phone numbers.
+// `display` is the human-readable form, `tel` is the dial string for tel: links.
+export const phoneNumbers = [
+   { display: "+1 (437) 436-7669", tel: "+14374367669" }, // primary
+   { display: "+1 (905) 226-4226", tel: "+19052264226" }, // secondary
+]
+export const primaryPhone = phoneNumbers[0]
+
 const allcars = [
    {
       "value":"ACURA",

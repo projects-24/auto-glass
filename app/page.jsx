@@ -13,19 +13,34 @@ import RowFlexUi from "@/ui/RowFlex";
 import UiButton from "@/ui/button";
 import Link from "next/link";
 import { companies } from "./data/Companies";
+import { phoneNumbers, companyEmail, socialLinks, locations } from "@/functions/Functions";
 
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "AutoRepair",
+  "@type": ["AutoRepair", "LocalBusiness"],
   "name": "AutoGlass Gurus",
-  "description": "Professional auto glass repair and replacement in Etobicoke & Ontario.",
+  "description": "Professional auto glass repair and replacement in Etobicoke & across Ontario. 24/7 mobile service, lifetime warranty, and we pay up to 100% of your deductible.",
   "url": "https://www.autoglassgurus.ca",
-  "telephone": "+14374367669",
-  "email": "info@autoglassgurus.ca",
+  "telephone": phoneNumbers.map((p) => p.tel),
+  "email": companyEmail,
   "address": { "@type": "PostalAddress", "addressLocality": "Etobicoke", "addressRegion": "ON", "addressCountry": "CA" },
-  "areaServed": "Ontario, Canada",
-  "openingHours": "Mo-Su 00:00-24:00",
+  "contactPoint": phoneNumbers.map((p) => ({
+    "@type": "ContactPoint",
+    "telephone": p.tel,
+    "contactType": "customer service",
+    "areaServed": "CA",
+    "availableLanguage": "English",
+  })),
+  "areaServed": locations.map((loc) => ({ "@type": "City", "name": loc })),
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "00:00",
+    "closes": "23:59",
+  },
+  "sameAs": Object.values(socialLinks),
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "120" },
   "priceRange": "$$",
 }
 

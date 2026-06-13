@@ -2,6 +2,7 @@ import 'funuicss/css/fun.css'
 import "./assets/style/_style.css";
 import "./assets/style/_Slide.css";
 import "aos/dist/aos.css"
+import Script from "next/script"
 import AosInit from "@/components/AosInit"
 
 
@@ -60,6 +61,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18174522353"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18174522353');
+          `}
+        </Script>
         <AosInit />
         {children}
       </body>

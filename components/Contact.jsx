@@ -1,6 +1,9 @@
+'use client'
 import React from 'react'
+import { phoneNumbers, companyEmail } from '@/functions/Functions'
+import { trackCall, trackLead } from '@/functions/analytics'
 
-export default function ContactUs() {
+export default function ContactUs({ location = "Etobicoke" }) {
   return (
     <div>
       <div className="section4">
@@ -8,22 +11,24 @@ export default function ContactUs() {
           <div className="col sm-12 md-6 lg-6 padding">
             <div className="padding border round-edge">
               <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Location:</h6>
-              Etobicoke, Canada
+              {location}, Canada
             </div>
           </div>
           <div className="col sm-12 md-6 lg-6 padding">
             <div className="border padding round-edge">
               <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Call Us:</h6>
-              <h5>
-                <a href="tel:+1 437-436-7669">+1 (905) 226-4226</a>
-              </h5>
+              {phoneNumbers.map((phone) => (
+                <h5 key={phone.tel} className="margin-bottom-5">
+                  <a href={`tel:${phone.tel}`} onClick={() => trackCall(phone.tel)}>{phone.display}</a>
+                </h5>
+              ))}
             </div>
           </div>
           <div className="col sm-12 md-6 lg-6 padding">
             <div className="padding border round-edge">
               <h6 className="text-bold text-p margin-bottom-10 text-minified uppercase">Email:</h6>
               <h5>
-                <a href="mailto:info@autoglassgurus.ca">info@autoglassgurus.ca</a>
+                <a href={`mailto:${companyEmail}`} onClick={() => trackLead({ method: 'email' })}>{companyEmail}</a>
               </h5>
             </div>
           </div>
@@ -32,4 +37,3 @@ export default function ContactUs() {
     </div>
   )
 }
-

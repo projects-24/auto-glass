@@ -97,6 +97,11 @@ position: relative;
 }
 .bottomNav{display: none;}
 .company_image{width: 80%;}
+/* Desktop nav is taller (92px header + 50px bar), so push the hero title down
+   to clear it and give the heading some breathing room at the top. */
+@media (min-width: 801px){
+    .homeTab{ padding-top: 180px; }
+}
 @media(max-width:800px){
     .company_image{width: 100%;}
     .homeTab{
@@ -161,6 +166,12 @@ a{
 }
 
 .button{padding: 0.7rem 1rem !important;}
+/* Desktop header is taller to fit the "Place a call" label + both phone numbers.
+   Mobile keeps the compact 60px header (phone block is hidden there). */
+@media (min-width: 801px){
+    :root{ --navtop-height: 92px; }
+}
+
 .navtop{
     position: fixed;
     top: 0;
@@ -258,7 +269,7 @@ i{margin: 0 !important;padding: 0 !important;}
 .section4{
     margin-top: 4rem;
 }
-.wrapper{min-height: 90vh; padding: 4rem 2rem;}
+.wrapper{padding: 4rem 2rem;}
 .contain{
     max-width: 900px; width: 100%;margin: 0 auto;
 }

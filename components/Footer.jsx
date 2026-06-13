@@ -1,4 +1,4 @@
-import { locations, socialLinks, toSlug } from '@/functions/Functions'
+import { locations, socialLinks, toSlug, phoneNumbers, companyEmail } from '@/functions/Functions'
 import Link from 'next/link'
 import RowFlexUi from '@/ui/RowFlex'
 import React from 'react'
@@ -31,14 +31,18 @@ export default function Footer() {
               <PiPhone className="margin-right-10" />
               <RowFlexUi gap={0.5}>
                 <div className="text-bold">Call Us:</div>
-                <div>+19052264226</div>
+                <div>
+                  {phoneNumbers.map((phone) => (
+                    <a key={phone.tel} href={`tel:${phone.tel}`} className="margin-right-10" style={{ textDecoration: 'none', color: 'inherit' }}>{phone.display}</a>
+                  ))}
+                </div>
               </RowFlexUi>
             </div>
             <div className="flex align-center margin-bottom-15">
               <PiEnvelope className="margin-right-10" />
               <RowFlexUi gap={0.5}>
                 <div className="text-bold">Email:</div>
-                <div>info@autoglassgurus.ca</div>
+                <a href={`mailto:${companyEmail}`} style={{ textDecoration: 'none', color: 'inherit' }}>{companyEmail}</a>
               </RowFlexUi>
             </div>
             <div className="flex align-center">

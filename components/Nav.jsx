@@ -8,7 +8,8 @@ import Logo from '@/ui/Logo'
 import RowFlexUi from '@/ui/RowFlex'
 import TextUi from '@/ui/Text'
 import LandbotLoader from './LandbotLoader'
-import { socialLinks } from '@/functions/Functions'
+import { socialLinks, phoneNumbers, primaryPhone } from '@/functions/Functions'
+import { trackCall } from '@/functions/analytics'
 export default function Nav() {
 
   const [showNav, setshowNav] = useState(false)
@@ -47,7 +48,6 @@ export default function Nav() {
         </Link>
      </div>
     <div className='hide-small'>
-       <a  href="tel:+1 437-436-7669">
         <RowFlexUi gap={0.1} alignItems='flex-end'>
           <PiPhone size={30} className='text-primary' />
         <div>
@@ -58,17 +58,13 @@ export default function Nav() {
           uppercase
           color={'primary'}
           />
-              <TextUi
-          text="+1 (437) 436-7669"
-          heading='h5'
-          />
-              <TextUi
-          text="+1 (437) 436-7669"
-          funcss='show-small'
-          />
+          {phoneNumbers.map((phone) => (
+            <a key={phone.tel} href={`tel:${phone.tel}`} onClick={() => trackCall(phone.tel)} className='text-primary' style={{ display: 'block', lineHeight: 1.4, marginTop: '0.15rem' }}>
+              <TextUi text={phone.display} heading='h5' />
+            </a>
+          ))}
         </div>
         </RowFlexUi>
-        </a>
     </div>
     <div className='hide-small' >
       <a href="mailto:info@autoglassgurus.ca"  className='text-primary'>info@autoglassgurus.ca</a>
@@ -143,18 +139,20 @@ export default function Nav() {
 
    
           <div className='show-small'>
-            <a  href="tel:+1 437-436-7669">
+            {phoneNumbers.map((phone) => (
+            <a key={phone.tel} href={`tel:${phone.tel}`} onClick={() => trackCall(phone.tel)}>
     <RowFlexUi gap={0.1}>
             <PiPhone size={20} className='text-white' />
         <div>
               <TextUi
-          text="+1 437-436-7669"
+          text={phone.display}
           color={"white"}
           />
         </div>
-        
+
         </RowFlexUi>
         </a>
+            ))}
     </div>
 
   
@@ -171,7 +169,7 @@ export default function Nav() {
         </div>
     </div>
       </a>
-      <a href="tel:+1 437-436-7669">
+      <a href={`tel:${primaryPhone.tel}`} onClick={() => trackCall(primaryPhone.tel)}>
     <div className='text-bold text-center'>
    <PiPhone className='text-white' size={30} />
         <div>
