@@ -31,6 +31,10 @@ export default function LocationPage({ params }) {
   const location = locations.find((loc) => toSlug(loc) === params.slug)
   if (!location) notFound()
 
+  // Swap the template city ("Etobicoke") in shared copy for the current city.
+  // No-op when location === "Etobicoke".
+  const localize = (text) => (text ? text.split('Etobicoke').join(location) : text)
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AutoRepair",
@@ -63,12 +67,12 @@ export default function LocationPage({ params }) {
           {autoGlassData.map((doc, i) => (
             <div key={i} className="col sm-12 md-4 lg-3 padding margin-top-30">
               <div className="product-image hover-up pointer">
-                <img src={doc.image} alt={doc.subtitle} className="width-80" />
+                <img src={doc.image} alt={localize(doc.subtitle)} className="width-80" />
               </div>
               <div className="margin-top-20">
-                <div className="h5">{doc.subtitle}</div>
+                <div className="h5">{localize(doc.subtitle)}</div>
               </div>
-              <div className="margin-top-10 article text-dark300">{doc.description}</div>
+              <div className="margin-top-10 article text-dark300">{localize(doc.description)}</div>
             </div>
           ))}
         </div>
@@ -119,8 +123,8 @@ export default function LocationPage({ params }) {
               <div key={i} className="row-flex section" style={{ gap: '0.5rem', alignItems: 'flex-start' }}>
                 <PiPlusCircle className="text-primary" size={28} style={{ flexShrink: 0 }} />
                 <div>
-                  <div className="h4 text-bold">{doc.title}</div>
-                  <div className="article text-dark300">{doc.description}</div>
+                  <div className="h4 text-bold">{localize(doc.title)}</div>
+                  <div className="article text-dark300">{localize(doc.description)}</div>
                 </div>
               </div>
             ))}
@@ -130,8 +134,8 @@ export default function LocationPage({ params }) {
               <div key={i} className="row-flex section" style={{ gap: '0.5rem', alignItems: 'flex-start' }}>
                 <PiPlusCircle className="text-primary" size={28} style={{ flexShrink: 0 }} />
                 <div>
-                  <div className="h4 text-bold">{doc.title}</div>
-                  <div className="article text-dark300">{doc.description}</div>
+                  <div className="h4 text-bold">{localize(doc.title)}</div>
+                  <div className="article text-dark300">{localize(doc.description)}</div>
                 </div>
               </div>
             ))}
