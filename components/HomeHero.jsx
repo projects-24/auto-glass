@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { PiPhone } from 'react-icons/pi'
+import { primaryPhone } from '@/functions/Functions'
 import TextUi from '@/ui/Text'
 import UiButton from '@/ui/button'
 
@@ -38,12 +39,12 @@ export default function HomeHero({ title = "Get Your Windshield Repaired" }) {
             <div>
               <TextUi text="call us now!" color="white" />
             </div>
-            <Link href="tel:+437-436-7669">
+            <Link href={`tel:${primaryPhone.tel}`}>
               <UiButton
                 startIcon={<PiPhone />}
                 color="white"
                 big
-                text={<TextUi text="+437-436-7669" color="white" heading="h2" light />}
+                text={<TextUi text={primaryPhone.display} color="white" heading="h2" light />}
               />
             </Link>
           </div>
