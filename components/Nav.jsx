@@ -40,7 +40,7 @@ export default function Nav() {
         </div>
       </div></Link>
      </div>
-      <div class="navtop white">
+      <div className="navtop white">
           {/* Logo with Image */}
      <div >
       <Link href="/#home">
@@ -48,8 +48,8 @@ export default function Nav() {
         </Link>
      </div>
     <div className='hide-small'>
-        <RowFlexUi gap={0.1} alignItems='flex-end'>
-          <PiPhone size={30} className='text-primary' />
+        <RowFlexUi gap={0.1} alignItems='center'>
+          <PiPhone size={36} className='text-primary' style={{ transform: 'translateY(0.6rem)' }} />
         <div>
               <TextUi
           text="Place a call"
@@ -90,19 +90,19 @@ export default function Nav() {
      
       </div>
   </div>
-  <div class="nav_bar " style={{
+  <div className="nav_bar " style={{
     height: showNav ? "100vh" : height > 800 ? "70px" : '0rem' , 
     overflowY: !showNav ? 'hidden' : '' , padding: showNav ? "2rem " : height > 800 ?  "1rem 2rem" : '0rem',
     
     }}>
  
     <RowFlexUi gap={1} responsiveSmall>
-      <a href="/" class="nav_link text-white  text-minified">Home</a>
-      <a href="/about" class="nav_link text-white  text-minified">About</a>
-      <a href="/#services" class="nav_link text-white  text-minified">Services</a>
-      <a href="/gallery" class="nav_link text-white  text-minified">Gallery</a>
-      <a href="/#testimonials" class="nav_link text-white  text-minified">Testimonials</a>
-      <a href="/contact#contact" class="nav_link text-white  text-minified">Contact</a>
+      <a href="/" className="nav_link text-white  text-minified">Home</a>
+      <a href="/about" className="nav_link text-white  text-minified">About</a>
+      <a href="/#services" className="nav_link text-white  text-minified">Services</a>
+      <a href="/gallery" className="nav_link text-white  text-minified">Gallery</a>
+      <a href="/#testimonials" className="nav_link text-white  text-minified">Testimonials</a>
+      <a href="/contact#contact" className="nav_link text-white  text-minified">Contact</a>
   </RowFlexUi>
  
    <RowFlexUi gap={1} responsiveSmall>

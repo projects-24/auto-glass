@@ -31,6 +31,7 @@ export default function Contact() {
     name: '',
     city: '',
     phone: '',
+    insuranceCoverage: '',
     message: '',
     vin: '',
   });
@@ -58,8 +59,8 @@ useEffect(() => {
 // };
 
   const CarParts = [
-    "Windscreen",
-    "Rear Windscreen",
+    "Windshield",
+    "Rear Windshield",
     "Front Door Glass",
     "Driver Rear Door Glass",
     "Passenger Rear Door Glass",
@@ -67,8 +68,8 @@ useEffect(() => {
     "Driver Rear Quarter Glass",
     "Passenger Rear Quarter Glass",
     "Rear Quarter Glass",
-    "chip repair",
-    "other"
+    "Chip Repair",
+    "Other"
   ];
 
   const currentYear = new Date().getFullYear();
@@ -117,7 +118,8 @@ const templateParams = {
 
 🛠️ REPAIR REQUEST
 ========================
-🔩 Requested Part  : ${form.part === 'other' ? form.otherPart : form.part || 'Not specified'}
+🔩 Requested Part  : ${form.part === 'Other' ? form.otherPart : form.part || 'Not specified'}
+🛡️ Insurance       : ${form.insuranceCoverage || 'Not specified'}
 🗒️ Additional Notes: ${form.message || 'None'}
 
 📍 Submitted via the company website.
@@ -152,6 +154,7 @@ const templateParams = {
         name: '',
         city: '',
         phone: '',
+        insuranceCoverage: '',
         vin:'',
         message:""
       });
@@ -208,6 +211,7 @@ const templateParams = {
           <select
             className="input section central borderedInput pointer hover-up round-edge full-width"
             onChange={handleChange('part')}
+            value={form.part}
           >
             <option value="">Select damaged glass part</option>
             {CarParts.map((part, i) => (
@@ -215,7 +219,7 @@ const templateParams = {
             ))}
           </select>
 
-          {form.part === "other" && (
+          {form.part === "Other" && (
             <Input
               fullWidth
               bordered
@@ -273,6 +277,21 @@ const templateParams = {
           <Input  type="text" required label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} hint="Your phone number, please" />
             </div>
           </RowFlexUi>
+          <div className="section"></div>
+          <Input
+            fullWidth
+            bordered
+            label="Insurance Coverage?"
+            select
+            options={[
+              { text: "Select an option", value: "" },
+              { text: "Yes, deal with insurance directly", value: "Yes, deal with insurance directly" },
+              { text: "No, self-pay / transparent rate", value: "No, self-pay / transparent rate" },
+            ]}
+            onChange={handleChange('insuranceCoverage')}
+            value={form.insuranceCoverage}
+            hint="Choose how you would like to handle payment"
+          />
           <div className="section"></div>
           <Input
             fullWidth
