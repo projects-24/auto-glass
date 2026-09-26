@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { canDecodeVin, parseVpicResponse, fetchVpic, lookupVin, compareVehicle, formatVpicForEmail } from './vpic.mjs';
+import { canDecodeVin, parseVpicResponse, fetchVpic, lookupVin, compareVehicle, populateVehicleFromVin, formatVpicForEmail } from './vpic.mjs';
 
 const vin = '1HGCM82633A004352';
 // Selected fields from the public vPIC response for this example VIN.
@@ -58,6 +58,29 @@ test('email records all decoded details and entered versus decoded differences',
   assert.match(message, /Make: Customer entered "Toyota" \| vPIC "HONDA" — DIFFERENT/);
   assert.match(message, /Year: Customer entered "2004" \| vPIC "2003" — DIFFERENT/);
   assert.match(message, /Model: Customer entered "Accord" \| vPIC "Accord" — Matches/);
+  assert.match(message, /REVIEW REQUIRED: Make, Year differ/);
+});
+
+test('VIN autofill populates available vehicle fields and retains the rest of the quote', () => {
+  const quote = { vin, make: '', model: '', year: '', name: 'Customer', part: 'Windshield' };
+  const populated = populateVehicleFromVin(quote, decoded);
+  assert.deepEqual(populated, { ...quote, make: 'HONDA', model: 'Accord', year: '2003' });
+  assert.equal(quote.make, '');
+});
+
+test('manual edits survive autofill and are flagged in the email', () => {
+  const quote = { vin, make: 'Toyota', model: '', year: '2004' };
+  const populated = populateVehicleFromVin(quote, decoded, ['make', 'year']);
+  assert.deepEqual(populated, { vin, make: 'Toyota', model: 'Accord', year: '2004' });
+  assert.match(formatVpicForEmail(populated, decoded), /REVIEW REQUIRED: Make, Year differ/);
+  assert.equal(populateVehicleFromVin({ ...quote, model: '' }, decoded, ['model']).model, '');
+});
+
+test('autofill ignores stale or unavailable lookups and preserves fields not returned by a partial decode', () => {
+  assert.equal(populateVehicleFromVin(form, { ...decoded, vin: 'other' }), form);
+  assert.equal(populateVehicleFromVin(form, { vin, status: 'unavailable' }), form);
+  const partial = { ...decoded, status: 'partial', vehicle: { make: 'HONDA' } };
+  assert.deepEqual(populateVehicleFromVin(form, partial), { ...form, make: 'HONDA' });
 });
 
 test('email accurately distinguishes absent, malformed, unavailable and partial VIN results', () => {

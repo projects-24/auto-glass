@@ -74,6 +74,17 @@ export function compareVehicle(form, lookup) {
   });
 }
 
+export function populateVehicleFromVin(form, lookup, editedFields = []) {
+  if (lookup?.vin !== normalizeVin(form.vin)
+    || !['decoded', 'partial'].includes(lookup?.status) || !lookup.vehicle) return form;
+  const updated = { ...form };
+  for (const [key] of fields) {
+    const decoded = text(lookup.vehicle[key]);
+    if (decoded && !editedFields.includes(key)) updated[key] = decoded;
+  }
+  return updated;
+}
+
 export function formatVpicForEmail(form, lookup) {
   const vin = normalizeVin(form.vin);
   if (!vin) return 'NHTSA vPIC: Not requested (VIN not provided).';
@@ -82,6 +93,7 @@ export function formatVpicForEmail(form, lookup) {
     return 'NHTSA vPIC: Lookup unavailable. Vehicle details were not verified; please check with the customer.';
   }
   const comparison = compareVehicle(form, lookup);
+  const differences = comparison.filter(field => field.status === 'different');
   return [
     'NHTSA vPIC VEHICLE DETAILS',
     `VIN checked: ${vin}`,
@@ -91,6 +103,7 @@ export function formatVpicForEmail(form, lookup) {
     `vPIC notes: ${lookup.errorText || 'None'}`,
     '',
     'ENTERED DETAILS VS VIN',
+    ...(differences.length ? [`REVIEW REQUIRED: ${differences.map(field => field.label).join(', ')} differ from the VIN details. The customer submitted the values shown below.`] : []),
     ...comparison.map(({ label, entered, decoded, status }) =>
       `${label}: Customer entered "${entered || 'Not provided'}" | vPIC "${decoded || 'Not returned'}" — ${status === 'different' ? 'DIFFERENT — please confirm' : status === 'match' ? 'Matches' : 'Not compared (missing information)'}`),
   ].join('\n');

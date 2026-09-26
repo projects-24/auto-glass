@@ -11,7 +11,7 @@ import TextUi from '@/ui/Text';
 import { companyEmail, primaryPhone } from '@/functions/Functions';
 import { trackLead } from '@/functions/analytics';
 import { validateVin, formatVinForEmail } from '@/functions/vin.mjs';
-import { formatVpicForEmail } from '@/functions/vpic.mjs';
+import { formatVpicForEmail, normalizeVin, populateVehicleFromVin } from '@/functions/vpic.mjs';
 import useVinLookup from '@/functions/useVinLookup';
 import VinFeedback from '@/components/VinFeedback';
 import emailjs from '@emailjs/browser';
@@ -25,6 +25,7 @@ export default function Contact() {
   const [showOther, setshowOther] = useState(false)
   const [isLoading, setisLoading] = useState(false)
   const submissionInFlight = useRef(false)
+  const vinAutofill = useRef({ vin: '', applied: false, editedFields: new Set() });
   const [form, setForm] = useState({
     part: '',
     otherPart: '',
@@ -42,6 +43,16 @@ export default function Contact() {
   });
   const vinValidation = validateVin(form.vin);
   const { lookup: vinLookup, getLookup: getVinLookup } = useVinLookup(form.vin);
+  useEffect(() => {
+    const vin = normalizeVin(form.vin);
+    const autofill = vinAutofill.current;
+    if (!vin || vinLookup.vin !== vin || !vinLookup.vehicle
+      || !['decoded', 'partial'].includes(vinLookup.status)
+      || autofill.vin !== vin || autofill.applied) return;
+    autofill.applied = true;
+    const editedFields = [...autofill.editedFields];
+    setForm(previous => populateVehicleFromVin(previous, vinLookup, editedFields));
+  }, [form.vin, vinLookup]);
 const [attachmentBase64, setAttachmentBase64] = useState('');
 
 useEffect(() => {
@@ -86,9 +97,19 @@ useEffect(() => {
     const year = 1990 + i;
     return { text: year.toString(), value: year.toString() };
   });
+  // Keep a decoded year selectable even when it is outside the usual list.
+  if (form.year && !years.some(year => year.value === form.year)) {
+    years.unshift({ text: form.year, value: form.year });
+  }
 
   const handleChange = (name) => (e) => {
-    setForm({ ...form, [name]: e.target.value });
+    const value = e.target.value;
+    if (name === 'vin' && normalizeVin(value) !== vinAutofill.current.vin) {
+      vinAutofill.current = { ...vinAutofill.current, vin: normalizeVin(value), applied: false };
+    }
+    // A lookup must not replace a field the customer has edited, even while it is loading.
+    if (['make', 'model', 'year'].includes(name)) vinAutofill.current.editedFields.add(name);
+    setForm(previous => ({ ...previous, [name]: value }));
   };
 
 const Submit = async () => {
@@ -115,34 +136,40 @@ const Submit = async () => {
   setisLoading(true);
   setmessage('');
   setalert_state('');
+  const shouldPopulate = !vinAutofill.current.applied;
+  const editedFields = [...vinAutofill.current.editedFields];
   const submittedVinLookup = await getVinLookup(form.vin);
+  // A quick submit must include decoded fields even before the autofill effect runs.
+  const submittedForm = shouldPopulate
+    ? populateVehicleFromVin(form, submittedVinLookup, editedFields)
+    : form;
 const templateParams = {
   email: companyEmail,
-  name: form.name,
+  name: submittedForm.name,
   message: `
 🔧 NEW WINDSHIELD REPAIR QUOTE REQUEST 🔧
 
 📌 CLIENT INFORMATION
 ========================
-👤 Name         : ${form.name || 'Not provided'}
-📧 Email        : ${form.email || 'Not provided'}
-📞 Phone        : ${form.phone || 'Not provided'}
-🏙️ City         : ${form.city || 'Not provided'}
+👤 Name         : ${submittedForm.name || 'Not provided'}
+📧 Email        : ${submittedForm.email || 'Not provided'}
+📞 Phone        : ${submittedForm.phone || 'Not provided'}
+🏙️ City         : ${submittedForm.city || 'Not provided'}
 
 🚗 VEHICLE DETAILS
 ========================
-🏷️ Make         : ${form.make || 'Not provided'}
-🚘 Model        : ${form.model || 'Not provided'}
-📅 Year         : ${form.year || 'Not provided'}
-🔢 VIN Number   : ${formatVinForEmail(form.vin)}
+🏷️ Make         : ${submittedForm.make || 'Not provided'}
+🚘 Model        : ${submittedForm.model || 'Not provided'}
+📅 Year         : ${submittedForm.year || 'Not provided'}
+🔢 VIN Number   : ${formatVinForEmail(submittedForm.vin)}
 
-${formatVpicForEmail(form, submittedVinLookup)}
+${formatVpicForEmail(submittedForm, submittedVinLookup)}
 
 🛠️ REPAIR REQUEST
 ========================
-🔩 Requested Part  : ${form.part === 'Other' ? form.otherPart : form.part || 'Not specified'}
-🛡️ Insurance       : ${form.insuranceCoverage || 'Not specified'}
-🗒️ Additional Notes: ${form.message || 'None'}
+🔩 Requested Part  : ${submittedForm.part === 'Other' ? submittedForm.otherPart : submittedForm.part || 'Not specified'}
+🛡️ Insurance       : ${submittedForm.insuranceCoverage || 'Not specified'}
+🗒️ Additional Notes: ${submittedForm.message || 'None'}
 
 📍 Submitted via the company website.
   `,
@@ -151,10 +178,10 @@ ${formatVpicForEmail(form, submittedVinLookup)}
 
   try {
     await emailjs.send(
-      'service_1nwb6jp',        // AutoGlass Gurus Gmail service
-      'template_n6qqkze',       // AutoGlass Gurus quote template
+      'service_ngnv1xe',        // AutoGlass Gurus business email service
+      'template_zketjr9',       // AutoGlass Gurus quote template
       templateParams,
-      { publicKey: '3xog12vb0S0C1QZGO' }
+      { publicKey: 'lKEYJS46l0Z1N3CWh' }
     );
   } catch (err) {
     // EmailJS rejects with { status, text }, rather than a standard Error.
@@ -180,6 +207,7 @@ ${formatVpicForEmail(form, submittedVinLookup)}
   setalert_state('success');
 
   // Clear form
+  vinAutofill.current = { vin: '', applied: false, editedFields: new Set() };
   setForm({
     part: '',
     otherPart: '',
@@ -229,6 +257,47 @@ ${formatVpicForEmail(form, submittedVinLookup)}
             <p className="article">Fill in your details below to get started</p>
           </div>
 
+          <p id="vin-instructions" style={{ margin: '0 0 16px', fontSize: '14px', lineHeight: 1.6 }}>
+            Enter your VIN to fill in the make, model and year automatically, or leave it blank and enter your vehicle details below.
+            You can edit any details after they are filled in. Any differences from the VIN will be included in your quote request for our team to review.
+          </p>
+          <Input
+            fullWidth
+            bordered
+            label="VIN Number (Optional)"
+            id="vin"
+            aria-label="VIN number"
+            aria-describedby="vin-instructions vin-validation"
+            aria-invalid={vinValidation.status === 'invalid'}
+            autoCapitalize="characters"
+            spellCheck={false}
+            onChange={handleChange('vin')}
+            value={form.vin}
+            hint="17-character vehicle identification number"
+          />
+          <VinFeedback validation={vinValidation} lookup={vinLookup} form={form} />
+
+          <div className="section"></div>
+          {/* Car details */}
+          <Input fullWidth bordered label="Car Make" onChange={handleChange('make')} value={form.make} hint="e.g. Toyota, Ford, Honda" />
+                    <div className="section"></div>
+          <Input fullWidth bordered label="Model" onChange={handleChange('model')} value={form.model} hint="e.g. Camry, Mustang, Civic" />
+                  {/* <div className="section"></div>
+          <Input fullWidth bordered label="Attachment" type="file" accept="image/*" onChange={handleFileChange} hint="Attach a photo of the damaged part" /> */}
+
+                  <div className="section"></div>
+          <Input
+            fullWidth
+            bordered
+            label="Year"
+            select
+            options={[{ text: "Select year", value: "" }, ...years]}
+            onChange={handleChange('year')}
+            value={form.year}
+            hint="Year of the car"
+          />
+
+                  <div className="section"></div>
           {/* Car part selection */}
           <select
             className="input section central borderedInput pointer hover-up round-edge full-width"
@@ -252,42 +321,6 @@ ${formatVpicForEmail(form, submittedVinLookup)}
             />
           )}
 
-          {/* Car details */}
-          <Input fullWidth bordered label="Car Make" onChange={handleChange('make')} value={form.make} hint="e.g. Toyota, Ford, Honda" />
-                    <div className="section"></div>
-          <Input fullWidth bordered label="Model" onChange={handleChange('model')} value={form.model} hint="e.g. Camry, Mustang, Civic" />
-                  {/* <div className="section"></div>
-          <Input fullWidth bordered label="Attachment" type="file" accept="image/*" onChange={handleFileChange} hint="Attach a photo of the damaged part" /> */}
-
-                  <div className="section"></div>
-          <Input
-            fullWidth
-            bordered
-            label="Year"
-            select
-            options={[{ text: "Select year", value: "" }, ...years]}
-            onChange={handleChange('year')}
-            value={form.year}
-            hint="Year of the car"
-          />
-
-                  <div className="section"></div>
-          <Input
-            fullWidth
-            bordered
-            label="VIN Number (Recommended)"
-            id="vin"
-            aria-label="VIN number"
-            aria-describedby="vin-validation"
-            aria-invalid={vinValidation.status === 'invalid'}
-            autoCapitalize="characters"
-            spellCheck={false}
-            onChange={handleChange('vin')}
-            value={form.vin}
-            hint="17-character vehicle identification number"
-          />
-          <VinFeedback validation={vinValidation} lookup={vinLookup} form={form} />
-  
           {/* Personal Information */}
           <RowFlexUi responsiveSmall gap={1} funcss="section">
             <div className="col">
