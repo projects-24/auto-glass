@@ -1,15 +1,19 @@
 'use client'
 import Hero from '@/components/Hero'
 import Nav from '@/components/Nav'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { PiPaperPlaneRight , PiKey, PiCheck, PiUser, PiPhone, PiTextAlignCenter, PiTextAlignJustify, PiPaperPlane } from 'react-icons/pi';
 import Input from '@/ui/input'
 import IconicInput from 'funuicss/ui/input/Iconic'
 import RowFlexUi from '@/ui/RowFlex';
 import UiButton from '@/ui/button';
 import TextUi from '@/ui/Text';
-import { cars, companyEmail } from '@/functions/Functions';
+import { companyEmail, primaryPhone } from '@/functions/Functions';
 import { trackLead } from '@/functions/analytics';
+import { validateVin, formatVinForEmail } from '@/functions/vin.mjs';
+import { formatVpicForEmail } from '@/functions/vpic.mjs';
+import useVinLookup from '@/functions/useVinLookup';
+import VinFeedback from '@/components/VinFeedback';
 import emailjs from '@emailjs/browser';
 import Loader from '@/ui/Loader';
 import Alert from 'funuicss/ui/alert/Alert'
@@ -20,6 +24,7 @@ export default function Contact() {
   const [alert_state, setalert_state] = useState("")
   const [showOther, setshowOther] = useState(false)
   const [isLoading, setisLoading] = useState(false)
+  const submissionInFlight = useRef(false)
   const [form, setForm] = useState({
     part: '',
     otherPart: '',
@@ -35,18 +40,22 @@ export default function Contact() {
     message: '',
     vin: '',
   });
+  const vinValidation = validateVin(form.vin);
+  const { lookup: vinLookup, getLookup: getVinLookup } = useVinLookup(form.vin);
 const [attachmentBase64, setAttachmentBase64] = useState('');
 
 useEffect(() => {
-      setTimeout(() => {
+      // Keep delivery errors visible until the visitor retries.
+      if (!message || alert_state === 'danger') return;
+      const timeout = setTimeout(() => {
         setmessage('');
         setalert_state(false);
       }, 5000);
 
   return () => {
-    clearTimeout()
+    clearTimeout(timeout)
   }
-}, [alert_state])
+}, [message, alert_state])
 
 
 // const handleFileChange = (e) => {
@@ -82,20 +91,31 @@ useEffect(() => {
     setForm({ ...form, [name]: e.target.value });
   };
 
-const Submit = () => {
+const Submit = async () => {
+  if (submissionInFlight.current) return;
+
   // Validate required fields
   if (
-    !form.name ||
-    !form.email ||
-    !form.phone 
+    !form.name.trim() ||
+    !form.email.trim() ||
+    !form.phone.trim()
   ) {
     setmessage('Please Enter your Name, Email & Contact!')
     setalert_state("warning")
     return;
   }
 
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+    setmessage('Please enter a valid email address.');
+    setalert_state('warning');
+    return;
+  }
+
+  submissionInFlight.current = true;
   setisLoading(true);
-  let testEmail =  "abdulwahabiddris08@gmail.com" 
+  setmessage('');
+  setalert_state('');
+  const submittedVinLookup = await getVinLookup(form.vin);
 const templateParams = {
   email: companyEmail,
   name: form.name,
@@ -114,7 +134,9 @@ const templateParams = {
 🏷️ Make         : ${form.make || 'Not provided'}
 🚘 Model        : ${form.model || 'Not provided'}
 📅 Year         : ${form.year || 'Not provided'}
-🔢 VIN Number   : ${form.vin || 'Not provided'}
+🔢 VIN Number   : ${formatVinForEmail(form.vin)}
+
+${formatVpicForEmail(form, submittedVinLookup)}
 
 🛠️ REPAIR REQUEST
 ========================
@@ -127,65 +149,65 @@ const templateParams = {
 };
 
 
-  emailjs
-    .send(
-      'service_ckthctb',        // Your EmailJS service ID
-      'template_e415yhv',       // Your EmailJS template ID
+  try {
+    await emailjs.send(
+      'service_1nwb6jp',        // AutoGlass Gurus Gmail service
+      'template_n6qqkze',       // AutoGlass Gurus quote template
       templateParams,
-      'Cs-Lc0t9aVCayuZ_Q'       // Your EmailJS public key
-    )
-    .then((res) => {
+      { publicKey: '3xog12vb0S0C1QZGO' }
+    );
+  } catch (err) {
+    // EmailJS rejects with { status, text }, rather than a standard Error.
+    console.error('Email sending failed:', err?.status, err?.text || err?.message || err);
+    const reason = err?.status === 429
+      ? 'Too many requests. Please wait a minute before trying again.'
+      : err?.status === 0 || err instanceof TypeError
+        ? 'Unable to connect. Please check your internet connection and try again.'
+        : 'Our quote form is temporarily unavailable.';
+    const diagnostic = process.env.NODE_ENV === 'development' && err?.text
+      ? ` EmailJS: ${err.text}`
+      : '';
+    setmessage(`${reason} Your details have been kept. You can also call ${primaryPhone.display} or email ${companyEmail}.${err?.status ? ` (Reference: ${err.status})` : ''}${diagnostic}`);
+    setalert_state('danger');
+    return;
+  } finally {
+    submissionInFlight.current = false;
+    setisLoading(false);
+  }
 
-      // Track the lead conversion (Google Ads)
-      trackLead({ method: 'quote_form', city: form.city || undefined });
+  // Show success message
+  setmessage('Quote request submitted successfully!, We will contact you soon.');
+  setalert_state('success');
 
-      // Show success message
-      setmessage('Quote request submitted successfully!, We will contact you soon.');
-      setalert_state('success');
+  // Clear form
+  setForm({
+    part: '',
+    otherPart: '',
+    make: '',
+    model: '',
+    year: '',
+    registration: '',
+    email: '',
+    name: '',
+    city: '',
+    phone: '',
+    insuranceCoverage: '',
+    vin:'',
+    message:""
+  });
 
-      // Clear form
-      setForm({
-        part: '',
-        otherPart: '',
-        make: '',
-        model: '',
-        year: '',
-        email: '',
-        name: '',
-        city: '',
-        phone: '',
-        insuranceCoverage: '',
-        vin:'',
-        message:""
-      });
-
-      // Stop loading
-      setisLoading(false);
-
-      // Hide message after 5 seconds
-
-    })
-    .catch((err) => {
-      console.error('Email sending failed:', err);
-      setmessage('Failed to submit quote. Please try again.');
-      setalert_state('error');
-      setisLoading(false);
-
-      setTimeout(() => {
-        setmessage('');
-        setalert_state(false);
-      }, 5000);
-    });
+  // A tracking failure must never turn a delivered quote into a failed submission.
+  try {
+    trackLead({ method: 'quote_form', city: form.city || undefined });
+  } catch (err) {
+    console.warn('Quote submitted, but conversion tracking failed:', err);
+  }
 };
 
 
 
   return (
     <div>
-      {
-        message && 
-      <Alert standard fixed="top-middle" card message={message} type={alert_state || "info"}/>
-      }
       {
         isLoading && 
         <Loader />
@@ -254,10 +276,17 @@ const templateParams = {
             fullWidth
             bordered
             label="VIN Number (Recommended)"
+            id="vin"
+            aria-label="VIN number"
+            aria-describedby="vin-validation"
+            aria-invalid={vinValidation.status === 'invalid'}
+            autoCapitalize="characters"
+            spellCheck={false}
             onChange={handleChange('vin')}
             value={form.vin}
-            hint="The Vehicle Identification Number "
+            hint="17-character vehicle identification number"
           />
+          <VinFeedback validation={vinValidation} lookup={vinLookup} form={form} />
   
           {/* Personal Information */}
           <RowFlexUi responsiveSmall gap={1} funcss="section">
@@ -303,6 +332,11 @@ const templateParams = {
             rows={5}
             hint="Any additional information you'd like to provide"
           />
+          {message && (
+            <div role="alert" className="section">
+              <Alert standard card message={message} type={alert_state || 'info'} />
+            </div>
+          )}
           <div className="section text-center">
             <UiButton
               fullWidth
@@ -310,6 +344,7 @@ const templateParams = {
               endIcon={<PiPaperPlane />}
               qoute
               onClick={Submit}
+              disabled={isLoading}
             />
           </div>
         </div>
