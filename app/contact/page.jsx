@@ -11,16 +11,17 @@ import TextUi from '@/ui/Text';
 import { companyEmail, primaryPhone } from '@/functions/Functions';
 import { trackLead } from '@/functions/analytics';
 import { validateVin, formatVinForEmail } from '@/functions/vin.mjs';
-import { formatVpicForEmail, normalizeVin, populateVehicleFromVin } from '@/functions/vpic.mjs';
+import { normalizeVin, populateVehicleFromVin } from '@/functions/vpic.mjs';
 import useVinLookup from '@/functions/useVinLookup';
 import VinFeedback from '@/components/VinFeedback';
 import emailjs from '@emailjs/browser';
 import Loader from '@/ui/Loader';
 import Alert from 'funuicss/ui/alert/Alert'
 import ContactUs from '@/components/Contact';
+import styles from './page.module.css';
 
 export default function Contact() {
-  const [message, setmessage] = useState(0)
+  const [message, setmessage] = useState('')
   const [alert_state, setalert_state] = useState("")
   const [showOther, setshowOther] = useState(false)
   const [isLoading, setisLoading] = useState(false)
@@ -163,8 +164,6 @@ const templateParams = {
 📅 Year         : ${submittedForm.year || 'Not provided'}
 🔢 VIN Number   : ${formatVinForEmail(submittedForm.vin)}
 
-${formatVpicForEmail(submittedForm, submittedVinLookup)}
-
 🛠️ REPAIR REQUEST
 ========================
 🔩 Requested Part  : ${submittedForm.part === 'Other' ? submittedForm.otherPart : submittedForm.part || 'Not specified'}
@@ -246,8 +245,8 @@ ${formatVpicForEmail(submittedForm, submittedVinLookup)}
         hero={"Get a Free Quote Online"}
         body={`     Let us help you with your auto glass needs. Contact us today to schedule your repair or replacement!`}
         />
-  <div style={{ minHeight: "100vh" }} className="flex dark900 text-dark round-edge">
-        <div className="width-600-max center">
+  <div style={{ minHeight: "100vh", paddingInline: "20px" }} className="flex dark900 text-dark round-edge">
+        <div className="width-600-max center" style={{ width: '100%', minWidth: 0 }}>
                <RowFlexUi gap={1} justify='center'>
             <img className="width-90" src="/reviewed.png" alt="" />
             <img className="width-90" src="/guaranteed.png" alt="" />
@@ -257,45 +256,48 @@ ${formatVpicForEmail(submittedForm, submittedVinLookup)}
             <p className="article">Fill in your details below to get started</p>
           </div>
 
-          <p id="vin-instructions" style={{ margin: '0 0 16px', fontSize: '14px', lineHeight: 1.6 }}>
-            Enter your VIN to fill in the make, model and year automatically, or leave it blank and enter your vehicle details below.
-            You can edit any details after they are filled in. Any differences from the VIN will be included in your quote request for our team to review.
-          </p>
-          <Input
-            fullWidth
-            bordered
-            label="VIN Number (Optional)"
-            id="vin"
-            aria-label="VIN number"
-            aria-describedby="vin-instructions vin-validation"
-            aria-invalid={vinValidation.status === 'invalid'}
-            autoCapitalize="characters"
-            spellCheck={false}
-            onChange={handleChange('vin')}
-            value={form.vin}
-            hint="17-character vehicle identification number"
-          />
-          <VinFeedback validation={vinValidation} lookup={vinLookup} form={form} />
+          <section className={styles.vehicleCard} aria-labelledby="vehicle-details-heading">
+            <h2 id="vehicle-details-heading" className={styles.vehicleHeading}>Vehicle details</h2>
+            <p id="vin-instructions" style={{ margin: '0 0 16px', fontSize: '14px', lineHeight: 1.6 }}>
+              Enter your VIN to fill in the make, model and year automatically, or leave it blank and enter your vehicle details below.
+              You can edit any details after they are filled in.
+            </p>
+            <Input
+              fullWidth
+              bordered
+              label="VIN Number (Optional)"
+              id="vin"
+              aria-label="VIN number"
+              aria-describedby="vin-instructions vin-validation"
+              aria-invalid={vinValidation.status === 'invalid'}
+              autoCapitalize="characters"
+              spellCheck={false}
+              onChange={handleChange('vin')}
+              value={form.vin}
+              hint="17-character vehicle identification number"
+            />
+            <VinFeedback validation={vinValidation} lookup={vinLookup} form={form} />
 
-          <div className="section"></div>
-          {/* Car details */}
-          <Input fullWidth bordered label="Car Make" onChange={handleChange('make')} value={form.make} hint="e.g. Toyota, Ford, Honda" />
+            <div className="section"></div>
+            {/* Car details */}
+            <Input fullWidth bordered label="Car Make" onChange={handleChange('make')} value={form.make} hint="e.g. Toyota, Ford, Honda" />
+                      <div className="section"></div>
+            <Input fullWidth bordered label="Model" onChange={handleChange('model')} value={form.model} hint="e.g. Camry, Mustang, Civic" />
+                    {/* <div className="section"></div>
+            <Input fullWidth bordered label="Attachment" type="file" accept="image/*" onChange={handleFileChange} hint="Attach a photo of the damaged part" /> */}
+
                     <div className="section"></div>
-          <Input fullWidth bordered label="Model" onChange={handleChange('model')} value={form.model} hint="e.g. Camry, Mustang, Civic" />
-                  {/* <div className="section"></div>
-          <Input fullWidth bordered label="Attachment" type="file" accept="image/*" onChange={handleFileChange} hint="Attach a photo of the damaged part" /> */}
-
-                  <div className="section"></div>
-          <Input
-            fullWidth
-            bordered
-            label="Year"
-            select
-            options={[{ text: "Select year", value: "" }, ...years]}
-            onChange={handleChange('year')}
-            value={form.year}
-            hint="Year of the car"
-          />
+            <Input
+              fullWidth
+              bordered
+              label="Year"
+              select
+              options={[{ text: "Select year", value: "" }, ...years]}
+              onChange={handleChange('year')}
+              value={form.year}
+              hint="Year of the car"
+            />
+          </section>
 
                   <div className="section"></div>
           {/* Car part selection */}

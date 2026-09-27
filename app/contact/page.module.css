@@ -1,0 +1,15 @@
+.vehicleCard {
+  min-width: 0;
+  padding: clamp(16px, 4vw, 24px);
+  border: 1px solid #dce2e8;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.vehicleHeading {
+  margin: 0 0 12px;
+  color: #123c60;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+}
