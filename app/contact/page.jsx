@@ -38,7 +38,6 @@ export default function Contact() {
     name: '',
     city: '',
     phone: '',
-    insuranceCoverage: '',
     message: '',
     vin: '',
   });
@@ -167,7 +166,6 @@ const templateParams = {
 🛠️ REPAIR REQUEST
 ========================
 🔩 Requested Part  : ${submittedForm.part === 'Other' ? submittedForm.otherPart : submittedForm.part || 'Not specified'}
-🛡️ Insurance       : ${submittedForm.insuranceCoverage || 'Not specified'}
 🗒️ Additional Notes: ${submittedForm.message || 'None'}
 
 📍 Submitted via the company website.
@@ -218,7 +216,6 @@ const templateParams = {
     name: '',
     city: '',
     phone: '',
-    insuranceCoverage: '',
     vin:'',
     message:""
   });
@@ -341,21 +338,6 @@ const templateParams = {
           <Input  type="text" required label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} hint="Your phone number, please" />
             </div>
           </RowFlexUi>
-          <div className="section"></div>
-          <Input
-            fullWidth
-            bordered
-            label="Insurance Coverage?"
-            select
-            options={[
-              { text: "Select an option", value: "" },
-              { text: "Yes, deal with insurance directly", value: "Yes, deal with insurance directly" },
-              { text: "No, self-pay / transparent rate", value: "No, self-pay / transparent rate" },
-            ]}
-            onChange={handleChange('insuranceCoverage')}
-            value={form.insuranceCoverage}
-            hint="Choose how you would like to handle payment"
-          />
           <div className="section"></div>
           <Input
             fullWidth
