@@ -18,6 +18,7 @@ import emailjs from '@emailjs/browser';
 import Loader from '@/ui/Loader';
 import Alert from 'funuicss/ui/alert/Alert'
 import ContactUs from '@/components/Contact';
+import CarDiagram from '@/components/CarDiagram';
 import styles from './page.module.css';
 
 export default function Contact() {
@@ -81,7 +82,7 @@ useEffect(() => {
 
   const CarParts = [
     "Windshield",
-    "Rear Windshield",
+    "Rear/Back Glass",
     "Front Door Glass",
     "Driver Rear Door Glass",
     "Passenger Rear Door Glass",
@@ -112,6 +113,9 @@ useEffect(() => {
     if (['make', 'model', 'year'].includes(name)) vinAutofill.current.editedFields.add(name);
     setForm(previous => ({ ...previous, [name]: value }));
   };
+
+  // Picking a window on the car diagram selects the matching glass part.
+  const selectPart = (part) => setForm(previous => ({ ...previous, part }));
 
 const Submit = async () => {
   if (submissionInFlight.current) return;
@@ -246,7 +250,7 @@ const templateParams = {
         body={`     Let us help you with your auto glass needs. Contact us today to schedule your repair or replacement!`}
         />
   <div style={{ minHeight: "100vh", paddingInline: "20px" }} className="flex dark900 text-dark round-edge">
-        <div className="width-600-max center" style={{ width: '100%', minWidth: 0 }}>
+        <div className={`center ${styles.quoteShell}`}>
                <RowFlexUi gap={1} justify='center'>
             <img className="width-90" src="/reviewed.png" alt="" />
             <img className="width-90" src="/guaranteed.png" alt="" />
@@ -255,6 +259,8 @@ const templateParams = {
             <TextUi text="Request a Quote" size="bigger" />
             <p className="article">Fill in your details below to get started</p>
           </div>
+        <div className={styles.quoteLayout}>
+        <div className={styles.formColumn}>
 
           <section className={styles.vehicleCard} aria-labelledby="vehicle-details-heading">
             <h2 id="vehicle-details-heading" className={styles.vehicleHeading}>Vehicle details</h2>
@@ -301,6 +307,7 @@ const templateParams = {
 
                   <div className="section"></div>
           {/* Car part selection */}
+          <CarDiagram horizontal value={form.part} onSelect={selectPart} className={styles.mobileDiagram} />
           <select
             className="input section central borderedInput pointer hover-up round-edge full-width"
             onChange={handleChange('part')}
@@ -383,6 +390,14 @@ const templateParams = {
               disabled={isLoading}
             />
           </div>
+        </div>
+        {/* Desktop: the diagram stays beside the form while scrolling. */}
+        <aside className={styles.diagramColumn} aria-label="Choose the damaged glass on a car diagram">
+          <p className={styles.diagramTitle}>Not sure what it&apos;s called?</p>
+          <p className={styles.diagramHint}>Tap the damaged window and we&apos;ll select it for you.</p>
+          <CarDiagram value={form.part} onSelect={selectPart} />
+        </aside>
+        </div>
         </div>
       </div>
         <div id='contact' className="wrapper">
