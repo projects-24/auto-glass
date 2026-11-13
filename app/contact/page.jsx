@@ -38,6 +38,7 @@ export default function Contact() {
     name: '',
     city: '',
     phone: '',
+    contactPreference: '',
     message: '',
     vin: '',
   });
@@ -155,6 +156,7 @@ const templateParams = {
 📧 Email        : ${submittedForm.email || 'Not provided'}
 📞 Phone        : ${submittedForm.phone || 'Not provided'}
 🏙️ City         : ${submittedForm.city || 'Not provided'}
+💬 Contact by   : ${submittedForm.contactPreference || 'No preference'}
 
 🚗 VEHICLE DETAILS
 ========================
@@ -216,6 +218,7 @@ const templateParams = {
     name: '',
     city: '',
     phone: '',
+    contactPreference: '',
     vin:'',
     message:""
   });
@@ -338,6 +341,22 @@ const templateParams = {
           <Input  type="text" required label="Phone" funcss="full-width" bordered value={form.phone} onChange={handleChange('phone')} hint="Your phone number, please" />
             </div>
           </RowFlexUi>
+          <div className="section"></div>
+          <Input
+            fullWidth
+            bordered
+            label="Preferred Contact Method"
+            select
+            options={[
+              { text: "How should we reach you?", value: "" },
+              { text: "Email", value: "Email" },
+              { text: "Phone", value: "Phone" },
+              { text: "Any (no preference)", value: "Any" },
+            ]}
+            onChange={handleChange('contactPreference')}
+            value={form.contactPreference}
+            hint="Let us know how you'd like us to follow up"
+          />
           <div className="section"></div>
           <Input
             fullWidth
